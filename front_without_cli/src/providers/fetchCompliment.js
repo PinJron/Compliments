@@ -11,5 +11,5 @@ export default async function fetchCompliment(resourse){
   else {
     resourse.value = "idi nahuy";
   }
-  console.log(resourse)
+  // console.log(resourse)
 }

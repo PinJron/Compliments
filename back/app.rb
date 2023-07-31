@@ -21,6 +21,15 @@ get '/api/compliments' do
     {status: :not_found}.to_json
   end
 end
+
 post '/api/compliments' do
-  compliment = Compliment.create("name": "mama")
+  # name = request.body.to_json/
+  request.body.rewind
+  payload = JSON.parse(request.body.read, symbolize_names: true)
+  # payload = JSON.parse(request.body, symbolize_keys:true)
+  # binding.irb
+  # payload = JSON.parse(request.body.read, symbolize_names: true)
+
+  # puts payload
+  Compliment.create("name": payload[:name])
 end
