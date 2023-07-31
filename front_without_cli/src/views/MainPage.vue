@@ -1,7 +1,7 @@
 <template>
   <div class="home">
     <div class="compliment-output">
-      compliment here {{ compliment }}
+      Комплимент: {{ compliment }}
     </div>
     <my-button 
       class="btn--compliment" 
@@ -44,6 +44,7 @@ function pushCompliment() {
 
 <style>
 .btn--compliment {
+  margin-top: 5px;
 }
 
 .home {
@@ -51,13 +52,15 @@ function pushCompliment() {
   margin-top: 25%;
 }
 
+.input {
+  margin-top: 5px;
+}
 .input--compliment {
   border-radius: 4px;
   border-color: rebeccapurple;
   background-color: rgb(238, 245, 245);
   /* padding: auto; */
   padding: 8px 80px;
-  margin-top: 5px;
   margin-bottom: 5px;
 }
 
