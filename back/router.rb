@@ -11,7 +11,19 @@ post '/api/compliments' do
     createCompliment(response, request)
 end
   
-  delete '/api/compliments/:id' do
-    # binding.irb
-    deleteCompliment(params["id"].to_i)
+delete '/api/compliments/:id' do
+  # binding.irb
+  deleteCompliment(params["id"].to_i)
+end
+
+post '/api/users/register' do
+    registerUser(response, request)
+end
+
+post '/api/users/login' do
+    loginUser(response, request)
+end
+
+get '/api/users' do
+    getUsers(response, request)
 end

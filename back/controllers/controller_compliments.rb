@@ -5,8 +5,8 @@ def getCompliment(id)
         if compliment.is_used == true
             compliment = {status: :is_used}.to_json
         else
-            compliment.is_used = true
-            compliment.save
+            # compliment.is_used = true //проставление метки использован в бд
+            # compliment.save
             compliment = {status: :ok}.merge!(compliment.attributes).to_json
         end
     else

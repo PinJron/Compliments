@@ -2,10 +2,13 @@
 require 'sinatra'
 require 'json'
 require "sinatra/activerecord"
-require_relative "controller.rb"
 require_relative "router.rb"
 
-Dir["#{__dir__}/models/*"].each {|p| require p}
+# binding.irb
+Dir["#{__dir__}/models/*"].sort.each { |p| require p }
+Dir["#{__dir__}/controllers/*"].sort.each { |p| require p }
+
+enable :sessions
 
 set :database, {adapter: "sqlite3", database: "foo.sqlite3"}
 # or set :database_file, "path/to/database.yml"
