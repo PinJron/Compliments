@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_08_01_121437) do
+ActiveRecord::Schema[7.0].define(version: 2023_08_01_123459) do
   create_table "compliments", force: :cascade do |t|
     t.string "name"
     t.boolean "is_used"
@@ -20,7 +20,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_08_01_121437) do
     t.string "username"
     t.integer "role_id"
     t.integer "last_compliment_id"
-    t.string "password"
+    t.string "password_digest"
   end
 
 end
