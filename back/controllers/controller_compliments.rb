@@ -1,4 +1,4 @@
-def getCompliment(id)
+def get_compliment(id)
     compliment = Compliment.find_by(id:)
     id += 1
     if compliment
@@ -14,7 +14,7 @@ def getCompliment(id)
     end
 end
 
-def createCompliment(response, request)
+def create_compliment(response, request)
     request.body.rewind
     payload = JSON.parse(request.body.read, symbolize_names: true)
     # payload = JSON.parse(request.body, symbolize_keys:true)
@@ -27,7 +27,7 @@ def createCompliment(response, request)
     # puts response.body
 end
 
-def deleteCompliment(id)
+def delete_compliment(id)
     compliment = Compliment.find_by(id: id).destroy
 end
 

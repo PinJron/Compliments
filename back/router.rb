@@ -4,26 +4,30 @@ require "sinatra/activerecord"
 
 get '/api/compliments/:id' do
     # puts params["id"]
-    getCompliment(params["id"].to_i)
+    get_compliment(params["id"].to_i)
 end
   
 post '/api/compliments' do
-    createCompliment(response, request)
+    create_compliment(response, request)
 end
   
 delete '/api/compliments/:id' do
   # binding.irb
-  deleteCompliment(params["id"].to_i)
+  delete_compliment(params["id"].to_i)
 end
 
 post '/api/users/register' do
-    registerUser(response, request)
+    register_user(response, request)
 end
 
 post '/api/users/login' do
-    loginUser(response, request)
+    login_user(response, request)
 end
 
 get '/api/users' do
-    getUsers(response, request)
+    get_all_users(response, request)
+end
+
+get '/api/users/me' do
+    get_my_user(response, request)
 end

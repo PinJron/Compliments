@@ -56,19 +56,31 @@ function pushCompliment() {
   margin-top: 5px;
 }
 .input--compliment {
-  border-radius: 4px;
-  border-color: rebeccapurple;
-  background-color: rgb(238, 245, 245);
-  /* padding: auto; */
-  padding: 8px 80px;
-  margin-bottom: 5px;
+  padding: 10px 15px;
+  border: 3px solid rgb(0, 0, 0);
+  border-radius: 40px;
+  position: relative;
+  font-size: 18px;
+  letter-spacing: 4px;
+  background: none;
+  height: fit-content;
+  width: 100%;
+  font-family: 'Fredoka One', cursive;
+  color: #e9b800
 }
 
 .compliment-output {
-  background-color: rgb(238, 245, 245);
   padding: 10px 15px;
-  border: 2px solid rebeccapurple;
-  border-radius: 4px;
+  border: 3px solid rgb(0, 0, 0);
+  border-radius: 40px;
+  position: relative;
+  font-size: 18px;
+  letter-spacing: 4px;
+  background: none;
+  height: fit-content;
+  width: 100%;
+  font-family: 'Fredoka One', cursive;
+  color: #e9b800
 }
 </style>
 

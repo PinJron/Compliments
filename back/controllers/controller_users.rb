@@ -1,4 +1,6 @@
-def registerUser(response, request)
+enable :sessions
+
+def register_user(response, request)
   request.body.rewind
   payload = JSON.parse(request.body.read, symbolize_names: true)
   candidate = User.find_by(username: payload[:username])
@@ -11,27 +13,36 @@ def registerUser(response, request)
       "last_compliment_id": payload[:last_compliment_id],
       "password": payload[:password]
       )
-    response = {status: :UserSuccesfullyRegister}.to_json
+    response = {status: :user_succesfully_register}.to_json
   end
 end
 
-def loginUser(response, request)
+def login_user(response, request)
   request.body.rewind
   payload = JSON.parse(request.body.read, symbolize_names: true)
   user = User.find_by(username: payload[:username])
-  if !user
-    response = {status: :ErrorUserNotExists}.to_json
+  return { status: :error_user_not_exists}.to_json unless user
+
+  return { status: :error_user_not_exists}.to_json unless user.authenticate(payload[:password])
+
+  session[:user_id] = user.id
+  user.attributes.to_json
+end
+
+def get_all_users(response, request)
+  user_role = User.find_by(id: session[:loggedUserId]).role_id
+  if user_role == 1
+    response = User.all.to_json
   else
-    user = user.authenticate(payload[:password])
-    # puts user
-    if user
-      response = {status: :UserSuccesfullyLogin}.to_json
-    else
-      response = {status: :ErrorWrongPassword}.to_json
-    end
+    response = {status: :error_access_not_allowed}.to_json
   end
 end
 
-def getUsers(response, request)
-  request = {status: :getUsers}.to_json
+def get_my_user(response, request)
+  user = User.find_by(id: session[:loggedUserId])
+  if user
+    response = user.to_json
+  else
+    response = {status: :error_access_not_allowed}.to_json
+  end
 end
