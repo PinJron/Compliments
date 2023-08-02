@@ -2,11 +2,11 @@
 require 'sinatra'
 require 'json'
 require "sinatra/activerecord"
-require_relative "router.rb"
 
 # binding.irb
 Dir["#{__dir__}/models/*"].sort.each { |p| require p }
 Dir["#{__dir__}/controllers/*"].sort.each { |p| require p }
+Dir["#{__dir__}/routers/*"].sort.each { |p| require_relative p }
 
 enable :sessions
 
