@@ -7,7 +7,19 @@
       class="btn--compliment" 
       @click="getCompliment"
     >
-    Гони сюда
+    FetchPost
+    </my-button>
+
+    <div class="input">
+      <input class="input--compliment" v-model="message" placeholder="Введите комплимент" />
+      <p>Message is: {{ message }}</p>
+    </div>
+
+    <my-button 
+      class="btn--compliment" 
+      @click="pushCompliment"
+    >
+    PushPost
     </my-button>
   </div>
 </template>
