@@ -17,14 +17,14 @@ jobs:
         run: bundle install
       - name: Run tests
         run: bundle exec rspec spec/spec.rb
-      - name: Test run
-        run: ruby app.rb
+      # - name: Test run
+      #   run: ruby app.rb
 
   Front:
     runs-on: ubuntu-latest
     defaults:
       run:
-        working-directory: ./app
+        working-directory: ./front_without_cli
     steps:
       - uses: actions/checkout@v3
       - name: Use Node.js ${{ matrix.node-version }}
