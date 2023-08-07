@@ -7,18 +7,17 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - name: Set up Ruby
-        working-directory: ./back
         uses: ruby/setup-ruby@ec02537da5712d66d4d50a0f33b7eb52773b5ed1
         with:
           ruby-version: '3.1.2'
       - name: Install dependencies
-        working-directory: ./app
+        working-directory: ./back
         run: bundle install
       - name: Run tests
-        working-directory: ./app
+        working-directory: ./back
         run: bundle exec rspec spec/spec.rb
       - name: Test run
-        working-directory: ./app
+        working-directory: ./back
         run: ruby app.rb
 
   Front:
@@ -26,10 +25,10 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - name: Use Node.js ${{ matrix.node-version }}
-        working-directory: ./front_without_cli
         uses: actions/setup-node@v3
         with:
-          node-version: ${{ matrix.node-version }}
+          node-version: ${{ matrix.node-version }}\
+        working-directory: ./front_without_cli
       - run: npm ci
       - run: npm run build --if-present
 
