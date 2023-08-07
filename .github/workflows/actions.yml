@@ -5,6 +5,8 @@ jobs:
   Explore-GitHub-Actions:
     runs-on: ubuntu-latest
     steps:
+      - run: gem install bundler
+      - run: bundle install
       - run: bundle exec rspec .back/spec/spec.rb
       # - run: echo "🐧 This job is now running on a ${{ runner.os }} server hosted by GitHub!"
       # - run: echo "🔎 The name of your branch is ${{ github.ref }} and your repository is ${{ github.repository }}."
