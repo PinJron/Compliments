@@ -11,7 +11,7 @@ jobs:
         with:
           ruby-version: '3.1.2'
       - name: Install dependencies
-        run: ./back/bundle install
+        run: cd ./back/ bundle install
       - name: Run tests
         run: ./back/bundle exec rspec .back/spec/spec.rb
       # - run: echo "🐧 This job is now running on a ${{ runner.os }} server hosted by GitHub!"
