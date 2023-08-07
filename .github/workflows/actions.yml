@@ -5,9 +5,15 @@ jobs:
   Explore-GitHub-Actions:
     runs-on: ubuntu-latest
     steps:
-      - run: gem install bundler
-      - run: bundle install
-      - run: bundle exec rspec .back/spec/spec.rb
+      - uses: actions/checkout@v3
+      - name: Set up Ruby
+        uses: ruby/setup-ruby@ec02537da5712d66d4d50a0f33b7eb52773b5ed1
+        with:
+          ruby-version: '3.1.2p20'
+      - name: Install dependencies
+        run: bundle install
+        name: Run tests
+        run: bundle exec rspec .back/spec/spec.rb
       # - run: echo "🐧 This job is now running on a ${{ runner.os }} server hosted by GitHub!"
       # - run: echo "🔎 The name of your branch is ${{ github.ref }} and your repository is ${{ github.repository }}."
       # - name: Check out repository code
