@@ -16,8 +16,7 @@ jobs:
       #   run: bundle exec rspec back/spec/spec.rb
       - name: Test run
         run: ruby back/app.rb
-
-jobs:
+        
   Front:
     runs-on: ubuntu-latest
     steps:
