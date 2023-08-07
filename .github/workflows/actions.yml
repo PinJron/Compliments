@@ -7,21 +7,26 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - name: Set up Ruby
+        working-directory: ./back
         uses: ruby/setup-ruby@ec02537da5712d66d4d50a0f33b7eb52773b5ed1
         with:
           ruby-version: '3.1.2'
       - name: Install dependencies
+        working-directory: ./app
         run: bundle install
-      # - name: Run tests
-      #   run: bundle exec rspec back/spec/spec.rb
+      - name: Run tests
+        working-directory: ./app
+        run: bundle exec rspec spec/spec.rb
       - name: Test run
-        run: ruby back/app.rb
+        working-directory: ./app
+        run: ruby app.rb
 
   Front:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
       - name: Use Node.js ${{ matrix.node-version }}
+        working-directory: ./front_without_cli
         uses: actions/setup-node@v3
         with:
           node-version: ${{ matrix.node-version }}
