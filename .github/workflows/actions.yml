@@ -16,10 +16,9 @@ jobs:
       #   run: bundle exec rspec back/spec/spec.rb
       - name: Test run
         run: ruby back/app.rb
-        
+
   Front:
     runs-on: ubuntu-latest
-    steps:
     steps:
       - uses: actions/checkout@v3
       - name: Use Node.js ${{ matrix.node-version }}
