@@ -1,7 +1,3 @@
-require 'sinatra'
-require 'json'
-require "sinatra/activerecord"
-
 post '/api/users/register' do
   register_user(response, request)
 end

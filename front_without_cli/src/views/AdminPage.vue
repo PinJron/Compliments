@@ -1,18 +1,21 @@
 <template>
   <div class="home">
-    <div class="compliment-output">
-      Комплимент: {{ compliment }}
-    </div>
-    <my-button 
+    <div class="fetch__compliment"> 
+      <div class="compliment__wrapper">
+        <div class="compliment__text">
+          Комплимент: {{ compliment }}
+        </div>
+      </div>
+      <my-button 
       class="btn--compliment" 
       @click="getCompliment"
-    >
-    FetchPost
+      >
+      FetchPost
     </my-button>
+  </div>
 
     <div class="input">
       <input class="input--compliment" v-model="message" placeholder="Введите комплимент" />
-      <p>Message is: {{ message }}</p>
     </div>
 
     <my-button 
@@ -26,23 +29,29 @@
 
 <script setup>
 import {ref} from 'vue'
-import fetchCompliment from "@/providers/fetchCompliment";
+import fetchRandomCompliment from "@/providers/fetchRandomCompliment";
 import createCompliment from "@/providers/createCompliment";
 
 let message = ref(null)   
 const compliment = ref(null)
 
 function getCompliment() {
-  fetchCompliment(compliment);
+  fetchRandomCompliment(compliment);
 }
 
 function pushCompliment() {
-  createCompliment(message);
+  if (createCompliment(message) == true) {
+    message.value = ""
+  }
 }
 
 </script>
 
 <style>
+.fetch__compliment {
+  margin-bottom: 40px;
+}
+
 .btn--compliment {
   margin-top: 5px;
 }
@@ -52,9 +61,6 @@ function pushCompliment() {
   margin-top: 25%;
 }
 
-.input {
-  margin-top: 5px;
-}
 .input--compliment {
   padding: 10px 15px;
   border: 3px solid rgb(0, 0, 0);
@@ -62,14 +68,13 @@ function pushCompliment() {
   position: relative;
   font-size: 18px;
   letter-spacing: 4px;
-  background: none;
   height: fit-content;
-  width: 100%;
+  width: 70%;
   font-family: 'Fredoka One', cursive;
   color: #e9b800
 }
 
-.compliment-output {
+.compliment__text {
   padding: 10px 15px;
   border: 3px solid rgb(0, 0, 0);
   border-radius: 40px;
@@ -78,9 +83,11 @@ function pushCompliment() {
   letter-spacing: 4px;
   background: none;
   height: fit-content;
-  width: 100%;
+  width: 70%;
   font-family: 'Fredoka One', cursive;
-  color: #e9b800
+  color: #e9b800;
+  display: flex;
+  justify-content: center;
 }
 </style>
 

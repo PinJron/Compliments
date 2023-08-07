@@ -3,7 +3,8 @@
   <a href="#" class="button button--pen">
     <div class="button__wrapper">
         <span class="button__text">
-          <slot></slot>
+          <slot
+          ></slot>
         </span>
     </div>
     <div class="characterBox">
@@ -29,31 +30,11 @@
 export default {
   name: 'my-button'
 }
+
+
 </script>
 
 <style scoped>
-
-
-.button--piyo{
-    --main_color : #f4cf47 ;
-    --sub_color1 : #f4e19c ;
-    --sub_color2 : #ff8108 ;
-    --base_color : #000 ;
-    --border_radius1 : 60px 60px 40px 40px / 48px 48px 30px 30px ;
-    --border_radius2 : 70px 70px 40px 40px / 48px 48px 30px 30px ;
-    --border_radius3 : 40px 40px 40px 40px / 48px 48px 30px 30px ;
-}
-.button--hoo{
-    --main_color : #4993ff ;
-    --sub_color1 : #385082 ;
-    --sub_color2 : #fff58f ;
-    --sub_color3 : #fff ;
-    --base_color : #FFF ;
-    --border_radius1 : 50px 50px 50px 50px / 40px 40px 40px 40px ;
-    --border_radius2 : 60px 60px 50px 50px / 40px 40px 40px 40px ;
-    --border_radius3 : 40px 40px 50px 50px / 60px 60px 40px 40px ;
-    --border_radius3 : 50px 50px 45px 45px / 40px 40px 60px 60px ;
-}
 .button--pen{
     --main_color : #4d4d4d ;
     --sub_color1 : #FFF ;
@@ -176,72 +157,6 @@ export default {
 .character__face::after{
     right : -5px ;
 }
-.button--hoo .character__face::before,
-.button--hoo .character__face::after{
-    background : #fff ;
-}
-.button--hoo .charactor__face2{
-    position : absolute ;
-    z-index : 1 ;
-    top : 8px ;
-    left : 0 ;
-    right : 0 ;
-    margin : auto ;
-    width : 14px ;
-    height : 10px ;
-    background : #385082 ;
-    animation : face_hoo 1s ease infinite alternate ;
-}
-.button--hoo .charactor__face2::before,
-.button--hoo .charactor__face2::after{
-    content : '' ;
-    position : absolute ;
-    top : -1px ;
-    width : 20px ;
-    height : 10px ;
-    box-sizing : border-box ;
-    border-radius : 50% ;
-    border : solid 3px #385082 ;
-    background : #000 ;
-}
-.button--hoo .charactor__face2::before{
-    left : -12px ;
-}
-.button--hoo .charactor__face2::after{
-    right : -12px ;
-}
-.button--hoo .charactor__body{
-    position : absolute ;
-    bottom : 0 ;
-    left : 0 ;
-    right : 0 ;
-    margin : 0 auto ;
-    width : 0 ;
-    height : 0 ;
-    border-top : solid 2px #385082 ;
-    border-left : solid 7px transparent ;
-    border-right : solid 7px transparent ;
-    border-bottom : solid 0 transparent ;
-    animation : body_hoo 1s ease infinite alternate ;
-}
-.button--hoo .charactor__body::before,
-.button--hoo .charactor__body::after{
-    content : '' ;
-    position : absolute ;
-    top : -4px ;
-    width : 0 ;
-    height : 0 ;
-    border-top : solid 2px #385082 ;
-    border-left : solid 7px transparent ;
-    border-right : solid 7px transparent ;
-    border-bottom : solid 0 transparent ;
-}
-.button--hoo .charactor__body::before{
-    left : -17px ;
-}
-.button--hoo .charactor__body::after{
-    right : -17px ;
-}
 
 .button--pen .charactor__face2{
     position : absolute ;
@@ -272,50 +187,8 @@ export default {
 .button--pen .charactor__face2::after{
     right : -4px ;
 }
-
-.button--piyo::before{
-    clip-path : path('M24,12.02c0-1.09-.75-1.71-.81-1.77L11.17,.45c-.91-.74-2.21-.56-2.91,.42-.69,.97-.52,2.37,.39,3.11l7.12,5.81-13.7-.02h0C.93,9.77,0,10.76,0,11.99c0,1.23,.93,2.22,2.07,2.22l13.7,.02-7.13,5.78c-.91,.74-1.09,2.13-.4,3.11,.41,.58,1.03,.88,1.65,.88,.44,0,.88-.15,1.25-.45l12.04-9.76c.07-.06,.82-.67,.82-1.77Z') ;
-}
-.button--hoo::before{
-    clip-path : path('M21.93,9.8h-3.33S11.5,.79,11.5,.79c-.74-.94-2.05-1.05-2.92-.26-.88,.79-.99,2.19-.25,3.13l4.84,6.13-11.09-.02C.95,9.73,0,10.76,0,11.99c0,1.23,.93,2.22,2.07,2.22l11.09,.02-4.86,6.12c-.74,.93-.63,2.33,.24,3.13,.39,.35,.87,.53,1.34,.53,.59,0,1.17-.27,1.58-.78l7.13-8.99h3.32s0,0,0,0c1.14,0,2.07-.99,2.07-2.22,0-1.23-.93-2.22-2.07-2.22Z') ;
-}
 .button--pen::before{
     clip-path : path('M23.36,10.63L6.18,.13c-.93-.57-1.85,.81-1.39,2.06l1.44,3.91c.3,.81,.01,1.81-.6,2.1L.72,10.58c-.96,.47-.96,2.37,0,2.83l4.91,2.38c.62,.3,.9,1.29,.6,2.1l-1.44,3.91c-.46,1.26,.46,2.63,1.39,2.06L23.36,13.37c.86-.53,.86-2.22,0-2.75Z') ;
-}
-.button--piyo .button__wrapper::before,
-.button--piyo .button__wrapper::after{
-    content : '' ;
-    position : absolute ;
-    bottom : 0 ;
-    width : 130px ;
-    height : 38px ;
-    background : var(--sub_color1) ;
-    clip-path : path('M13.77,37.35L.25,16.6c-.87-1.33,.69-2.91,2-2.02l12.67,8.59c.81,.55,1.91,.14,2.18-.81l2.62-9.33c.39-1.4,2.34-1.42,2.76-.02l3.6,11.99c.33,1.11,1.74,1.4,2.47,.52L49.38,.52c.87-1.04,2.53-.42,2.53,.95V23.7c0,1.13,1.2,1.83,2.16,1.26l12.75-7.51c.85-.5,1.94,0,2.13,.98l1.5,7.6c.2,1.03,1.37,1.51,2.22,.92l17.74-12.3c1.09-.75,2.52,.25,2.21,1.55l-2.44,10.2c-.26,1.09,.74,2.06,1.8,1.75l30.8-9.04c1.37-.4,2.42,1.26,1.49,2.36l-9.07,10.66c-.83,.98-.1,2.49,1.17,2.42l12.12-.68c1.6-.09,2.12,2.15,.65,2.8l-2.73,1.21c-.18,.08-.38,.12-.58,.12H14.97c-.48,0-.93-.25-1.2-.65Z') ;
-}
-.button--piyo .button__wrapper::before{
-    left : 0 ;
-}
-.button--piyo .button__wrapper::after{
-    right : 0 ;
-    transform : rotateY(180deg) ;
-}
-.button--hoo .button__wrapper::before,
-.button--hoo .button__wrapper::after{
-    content : '' ;
-    position : absolute ;
-    width : 80px ;
-    height : 100px ;
-    background : var(--sub_color1) ;
-    clip-path : path('M75.96,41.27l-42.76,11.17V0H0V100H33.2v-28.75l45.07-23.97c3.38-1.8,1.39-6.98-2.31-6.01Z') ;
-}
-.button--hoo .button__wrapper::before{
-    left : 6px ;
-    bottom : 0 ;
-}
-.button--hoo .button__wrapper::after{
-    right : 8px ;
-    bottom : -10px ;
-    transform : rotateY(180deg) ;
 }
 .button--pen .button__wrapper::before,
 .button--pen .button__wrapper::after{
@@ -361,20 +234,6 @@ export default {
 .button:hover .wakeup:nth-child(2) .character__face::before,
 .button:hover .wakeup:nth-child(2) .character__face::after{
     animation : eye_2 5s linear infinite ;
-}
-.button--hoo:hover .wakeup .charactor__face2::before,
-.button--hoo:hover .wakeup .charactor__face2::after{
-    height : 20px ;
-}
-.button--hoo:hover .wakeup .charactor__body{
-    animation : body_hoo_wakeup .2s ease ;
-    animation-fill-mode : forwards ;
-    border-top : solid 6px #385082 ;
-}
-.button--hoo:hover .wakeup .charactor__body::before,
-.button--hoo:hover .wakeup .charactor__body::after{
-    top : -12px ;
-    border-top : solid 5px #385082 ;
 }
 .button--pen:hover .wakeup .charactor__face2{
     animation : face_pen_wakeup .2s ease ;
@@ -530,22 +389,6 @@ export default {
         transform : translateX(0);
     }
 }
-@keyframes body_hoo{
-    0%  {
-        bottom : 2px ;
-    }
-    100%{
-        bottom : 0 ;
-    }
-}
-@keyframes body_hoo_wakeup{
-    0%  {
-        bottom : 2px ;
-    }
-    100%{
-        bottom : 6px ;
-    }
-}
 @keyframes face_pen{
     0%  {
         height : 14px ;
@@ -562,14 +405,6 @@ export default {
         height : 28px ;
     }
 }
-
-
-
-
-
-
-
-/* 本体と関係ないスタイル */
 .container{
   width: 100%;
     height: 140px;

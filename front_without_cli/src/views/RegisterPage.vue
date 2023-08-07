@@ -1,12 +1,10 @@
 <template>
   <div>
-    <div class="input">
-      <input class="input--compliment" v-model="login" placeholder="Введите логин" />
-      <p>login is: {{ login }}</p>
+    <div class="input__wrapper">
+      <input class="register__input" v-model="login" placeholder="Введите логин" />
     </div>
-    <div class="input">
-      <input class="input--compliment" v-model="password" placeholder="Введите пароль" :rules="[{ required: true, message: 'Password is required' }]" />
-      <p>password is: {{ password }}</p>
+    <div class="input__wrapper">
+      <input class="register__input" v-model="password" placeholder="Введите пароль" />
     </div>
     <my-button 
       class="btn--compliment" 
@@ -31,5 +29,29 @@ function registerUser() {
 </script>
 
 <style>
+.input__wrapper {
+  margin-top: 5px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.register__input {
+  padding: 10px 15px;
+  border: 3px solid rgb(0, 0, 0);
+  border-radius: 40px;
+  position: relative;
+  font-size: 18px;
+  letter-spacing: 4px;
+  background: none;
+  height: 60px;
+  width: 25%;
+  font-family: 'Fredoka One', cursive;
+  color: #e9b800
+}
+
+.btn--compliment {
+  width: 50px;
+}
 </style>
 
