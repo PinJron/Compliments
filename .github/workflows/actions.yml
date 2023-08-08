@@ -1,46 +1,40 @@
-name: Tests
-run-name: ${{ github.actor }} is testing
-on: [push]
+name: Deploy staging
+
+on:
+  workflow_dispatch:
+
 jobs:
-  Explore-GitHub-Actions:
+  deploy_staging:
     runs-on: ubuntu-latest
-    defaults:
-      run:
-        working-directory: ./back
     steps:
-      - uses: actions/checkout@v3
-      - name: Set up Ruby
-        uses: ruby/setup-ruby@ec02537da5712d66d4d50a0f33b7eb52773b5ed1
-        with:
-          ruby-version: '3.1.2'
-      - name: Install dependencies
-        run: bundle install
-      - name: Run tests
-        run: bundle exec rspec spec/spec.rb
-      # - name: Test run
-      #   run: ruby app.rb
+    - uses: actions/checkout@v3
+    - name: Build the Docker image
+      env:
+        KEY: ${{ secrets.PRODUCTION_KEY }}
+      run: |
+        echo -n $KEY > ${{ github.workspace }}/config/production.key
+        docker build -t ghcr.io/emfy0/gtm_app:latest .
 
-  Front:
-    runs-on: ubuntu-latest
-    defaults:
-      run:
-        working-directory: ./front_without_cli
-    steps:
-      - uses: actions/checkout@v3
-      - name: Use Node.js ${{ matrix.node-version }}
-        uses: actions/setup-node@v3
-        with:
-          node-version: '14.x'
-      - run: npm ci
-      - run: npm run build --if-present
+    - name: Push docker image
+      env:
+        CR_PAT: ${{ secrets.DOCKER_REGESTRY_TOKEN }}
+      run: |
+        echo $CR_PAT | docker login ghcr.io -u emfy0 --password-stdin
+        docker push ghcr.io/emfy0/gtm_app:latest
 
-      # - run: echo "🐧 This job is now running on a ${{ runner.os }} server hosted by GitHub!"
-      # - run: echo "🔎 The name of your branch is ${{ github.ref }} and your repository is ${{ github.repository }}."
-      # - name: Check out repository code
-      #   uses: actions/checkout@v3
-      # - run: echo "💡 The ${{ github.repository }} repository has been cloned to the runner."
-      # - run: echo "🖥️ The workflow is now ready to test your code on the runner."
-      # - name: List files in the repository
-      #   run: |
-      #     ls ${{ github.workspace }}
-      # - run: echo "🍏 This job's status is ${{ job.status }}."
+    - name: Setup shh credentials
+      shell: bash
+      env:
+        SSH_PRIVATE_KEY: ${{ secrets.STAGING_SSH_PRIVATE_KEY }}
+        SSH_KNOWN_HOSTS: ${{ secrets.STAGING_SSH_KNOWN_HOSTS }}
+      run: |
+          mkdir -p ~/.ssh/
+          echo "$SSH_KNOWN_HOSTS" > ~/.ssh/known_hosts
+          echo "$SSH_PRIVATE_KEY" > ~/.ssh/id_rsa
+          sudo chmod 600 ~/.ssh/id_rsa
+
+    - name: Deploy image
+      env:
+        DOCKER_HOST: ssh://${{ secrets.STAGING_USER }}@${{ secrets.STAGING_HOST }}
+      run: |
+        docker stack deploy --compose-file ${{ github.workspace }}/docker-compose.yml --with-registry-auth gtm-eng
