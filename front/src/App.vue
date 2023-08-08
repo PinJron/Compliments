@@ -4,7 +4,12 @@
     </div>
 </template>
 
-<style lang="scss">
+<script setup>
+import {RouterView} from "vue-router"
+
+</script>
+
+<style>
 * {
   background-color: antiquewhite;
   margin: 0%;

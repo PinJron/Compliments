@@ -1,54 +1,78 @@
 <template>
   <div class="home">
-    <div class="compliment-output">
-      compliment here {{ compliment }}
-    </div>
-    <my-button 
+    <div>
+      <div class="compliment__wrapper">
+        <div class="compliment__text">
+          Комплимент: {{ compliment }}
+        </div>
+      </div>
+      <my-button 
       class="btn--compliment" 
-    >
-    FetchPosts
+      @click="getCompliment()"
+      >
+      Гони сюда
     </my-button>
+      <my-like-button>
+        123
+      </my-like-button>
+    </div>
   </div>
 </template>
 
-<script>
+<script setup>
 import {ref} from 'vue'
-// import fetchCompliment from "@/store/fetchCompliment"
+import fetchRandomCompliment from "@/providers/fetchRandomCompliment";
+import fetchComplimentById from "@/providers/fetchComplimentById";
 
-// const compliment = ref(null)
+import createCompliment from "@/providers/createCompliment";
+import { useCounterStore } from '@/stores/counter';
 
-// fetchCompliment("12312");
+const counter = useCounterStore()
+const compliment = ref(null)
 
-// import axios from "axios"
 
-// export default async function fetchCompliment(resourse){
-//   // тут надо сделать реквест на бек и сохранить в переменную комплимент
-//   console.log("fetchCompliment")
-//   const response = await axios.get('api/compliments');
-//   console.log(response);
-//   if (response.data.status == "ok") {
-//     resourse = response.data.name;
-//   }
-//   else {
-//     resourse = "idi nahuy";
-//   }
+function getCompliment() {
+  fetchRandomCompliment(compliment);
+  counter.increment()
+}
+
+  // function pushCompliment() {
+//   createCompliment(message);
 // }
-
 </script>
 
-<style lang="scss">
+<style>
 .btn--compliment {
+  margin-top: 5px;
+}
+
+.compliment__wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .home {
   text-align: center;
+  margin-top: 25%;
 }
 
-.compliment-output {
-  background-color: rgb(185, 208, 208);
+.input {
+  margin-top: 5px;
+}
+
+.input--compliment {
   padding: 10px 15px;
-  border: 2px solid rebeccapurple;
-  border-radius: 4px;
+  border: 3px solid rgb(0, 0, 0);
+  border-radius: 40px;
+  position: relative;
+  font-size: 18px;
+  letter-spacing: 4px;
+  background: none;
+  height: fit-content;
+  width: 100%;
+  font-family: 'Fredoka One', cursive;
+  color: #e9b800
 }
 </style>
 
