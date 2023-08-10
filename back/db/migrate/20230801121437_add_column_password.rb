@@ -3,4 +3,6 @@ class AddColumnPassword < ActiveRecord::Migration[7.0]
     add_column :users do |u|
       u.string :username
       u.string :password_digest
+    end
+  end
 end
