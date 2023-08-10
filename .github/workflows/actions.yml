@@ -8,15 +8,23 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v3
+    
+    - name: Login
+      env:
+        CR_PAT: ${{ secrets.DOCKER_REGESTRY_TOKEN }}
+      run: |
+        echo $CR_PAT | docker login ghcr.io -u PinJron --password-stdin
+
+    - name: Pull docker image
+      run: |
+        docker pull ghcr.io/pinjron/compliments:latest
+
     - name: Build the Docker image
       run: |
         docker build . -t ghcr.io/pinjron/compliments:latest --target ruby
 
     - name: Push docker image
-      env:
-        CR_PAT: ${{ secrets.DOCKER_REGESTRY_TOKEN }}
       run: |
-        echo $CR_PAT | docker login ghcr.io -u PinJron --password-stdin
         docker push ghcr.io/pinjron/compliments:latest
 
     - name: Setup shh credentials
