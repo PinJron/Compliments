@@ -9,18 +9,15 @@ jobs:
     steps:
     - uses: actions/checkout@v3
     - name: Build the Docker image
-      env:
-        KEY: ${{ secrets.PRODUCTION_KEY }}
       run: |
-        echo -n $KEY > ${{ github.workspace }}/config/production.key
-        docker build -t ghcr.io/emfy0/gtm_app:latest .
+        docker build . -t ghcr.io/pinjron/compliments:latest --target ruby
 
     - name: Push docker image
       env:
         CR_PAT: ${{ secrets.DOCKER_REGESTRY_TOKEN }}
       run: |
-        echo $CR_PAT | docker login ghcr.io -u emfy0 --password-stdin
-        docker push ghcr.io/emfy0/gtm_app:latest
+        echo $CR_PAT | docker login ghcr.io -u PinJron --password-stdin
+        docker push ghcr.io/pinjron/compliments:latest
 
     - name: Setup shh credentials
       shell: bash
@@ -37,4 +34,4 @@ jobs:
       env:
         DOCKER_HOST: ssh://${{ secrets.STAGING_USER }}@${{ secrets.STAGING_HOST }}
       run: |
-        docker stack deploy --compose-file ${{ github.workspace }}/docker-compose.yml --with-registry-auth gtm-eng
+        docker stack deploy --compose-file ${{ github.workspace }}/docker-compose-prod.yml gtm-compliments

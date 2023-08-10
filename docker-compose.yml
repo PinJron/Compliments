@@ -1,0 +1,10 @@
+services:
+  website:
+    build:
+      context: .
+      target: ruby
+    command: bundle exec ruby app.rb -p 3001
+    ports:
+      - "3001:3001"
+    stdin_open: true
+    tty: true

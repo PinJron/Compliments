@@ -1,0 +1,6 @@
+.vscode
+front/node_modules
+back/db_data/*
+Dockerfile
+docker-compose*.yml
+.git

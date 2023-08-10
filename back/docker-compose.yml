@@ -1,8 +1,0 @@
-services:
-  web:
-    build: .
-    command: bundle exec ruby app.rb -p 3000
-    ports:
-      - "3000:3000"
-    stdin_open: true
-    tty: true

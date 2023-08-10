@@ -2,7 +2,7 @@
 default: &default
   adapter: sqlite3
   encoding: unicode
-  database: db/foo.sqlite3
+  database: db_data/foo.sqlite3
   pool: 5
   timeout: 5000
   # host: db
