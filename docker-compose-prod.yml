@@ -15,5 +15,22 @@ services:
     volumes:
       - db:/app/db_data/:rw
 
+  migration:
+    image: ghcr.io/pinjron/compliments
+    # build:
+    #   context: .
+    #   target: ruby
+    command: bundle exec rake db:migrate
+    # ports:
+    #   - target: 3000
+    #     published: 3000
+    #     protocol: tcp
+    #     mode: host
+    stdin_open: true
+    tty: true
+    volumes:
+      - db:/app/db_data/:rw
+
+
 volumes:
   db:
