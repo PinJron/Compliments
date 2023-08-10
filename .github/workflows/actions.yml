@@ -34,4 +34,4 @@ jobs:
       env:
         DOCKER_HOST: ssh://${{ secrets.STAGING_USER }}@${{ secrets.STAGING_HOST }}
       run: |
-        docker stack deploy --compose-file ${{ github.workspace }}/docker-compose-prod.yml gtm-compliments
+        docker stack deploy --compose-file ${{ github.workspace }}/docker-compose-prod.yml --with-registry-auth gtm-compliments
