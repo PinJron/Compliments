@@ -3,7 +3,7 @@
     <div>
       <div class="compliment__wrapper">
         <div class="compliment__text">
-          Комплимент: {{ compliment }}
+          {{ compliment }}
         </div>
       </div>
       <my-button 
@@ -12,9 +12,9 @@
       >
       Гони сюда
     </my-button>
-      <my-like-button>
+      <!-- <my-like-button>
         123
-      </my-like-button>
+      </my-like-button> -->
     </div>
   </div>
 </template>
