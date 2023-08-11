@@ -1,9 +1,7 @@
 services:
   website:
     image: ghcr.io/pinjron/compliments
-    # build:
-    #   context: .
-    #   target: ruby
+    container_name: "site"
     command: bundle exec ruby app.rb -p 3000
     ports:
       - target: 3000
@@ -14,9 +12,16 @@ services:
     tty: true
     volumes:
       - db:/app/db_data/:rw
+    labels:
+    - "traefik.enable=true"
+    - "traefik.http.routers.qwe.rule=Host(`disel.development-env.ru`)"
+    - "traefik.http.routers.qwe.entrypoints=websecure"
+    - "traefik.http.routers.qwe.tls.certresolver=myresolver"
 
   migration:
+    restart: on-failure
     image: ghcr.io/pinjron/compliments
+    container_name: "migrations"
     # build:
     #   context: .
     #   target: ruby
@@ -31,6 +36,25 @@ services:
     volumes:
       - db:/app/db_data/:rw
 
+  traefik:
+    image: "traefik:v2.10"
+    container_name: "traefik"
+    command:
+      #- "--log.level=DEBUG"
+      - "--api.insecure=true"
+      - "--providers.docker=true"
+      - "--providers.docker.exposedbydefault=false"
+      - "--entrypoints.websecure.address=:443"
+      - "--certificatesresolvers.myresolver.acme.tlschallenge=true"
+      #- "--certificatesresolvers.myresolver.acme.caserver=https://acme-staging-v02.api.letsencrypt.org/directory"
+      - "--certificatesresolvers.myresolver.acme.email=dimitry.zelencko@yandex.ru"
+      - "--certificatesresolvers.myresolver.acme.storage=/letsencrypt/acme.json"
+    ports:
+      - "443:443"
+    volumes:
+      - "letsencrypt:/letsencrypt"
+      - "/var/run/docker.sock:/var/run/docker.sock:ro"
 
 volumes:
   db:
+  letsencrypt:
