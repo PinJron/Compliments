@@ -3,11 +3,6 @@ services:
     image: ghcr.io/pinjron/compliments
     container_name: "site"
     command: bundle exec ruby app.rb -p 3000
-    ports:
-      - target: 3000
-        published: 3000
-        protocol: tcp
-        mode: host
     stdin_open: true
     tty: true
     volumes:
@@ -17,6 +12,8 @@ services:
     - "traefik.http.routers.qwe.rule=Host(`disel.development-env.ru`)"
     - "traefik.http.routers.qwe.entrypoints=websecure"
     - "traefik.http.routers.qwe.tls.certresolver=myresolver"
+    - "traefik.http.services.qwe.loadbalancer.server.port=3000"
+
 
   migration:
     restart: on-failure
