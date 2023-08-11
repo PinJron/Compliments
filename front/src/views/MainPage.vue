@@ -3,7 +3,7 @@
     <div>
       <div class="compliment__wrapper">
         <div class="compliment__text">
-          {{ compliment }}
+          Комплимент: {{ compliment }}
         </div>
       </div>
       <my-button 
