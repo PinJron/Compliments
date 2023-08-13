@@ -11,13 +11,12 @@ import {RouterView} from "vue-router"
 
 <style>
 * {
-  background-color: antiquewhite;
   margin: 0%;
   padding: 0%;
   box-sizing: border-box;
 }
 .app {
-  padding: 20px;
+  padding: 0px;
 }
 .home {
   text-align: center;

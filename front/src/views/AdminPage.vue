@@ -1,4 +1,6 @@
 <template>
+  <nav-bar>
+  </nav-bar>
   <div class="home">
     <compliment-output>
     </compliment-output>
