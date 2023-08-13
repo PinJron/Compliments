@@ -19,5 +19,8 @@ import {RouterView} from "vue-router"
 .app {
   padding: 20px;
 }
-
+.home {
+  text-align: center;
+  margin-top: 25%;
+}
 </style>
