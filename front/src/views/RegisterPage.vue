@@ -1,7 +1,9 @@
 <template>
   <nav-bar>
   </nav-bar>
-  <register-form>
+  <div class="line"></div>
+  <register-form
+  button-text = "Зарегистрироваться">
   </register-form>
 </template>
 

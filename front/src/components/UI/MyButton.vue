@@ -3,8 +3,7 @@
   <a href="#" class="button button--pen">
     <div class="button__wrapper">
         <span class="button__text">
-          <slot
-          ></slot>
+          <slot></slot>
         </span>
     </div>
     <div class="characterBox">
@@ -31,7 +30,14 @@ export default {
   name: 'my-button'
 }
 
+</script>
 
+<script setup>
+// const props = defineProps({
+//                 text: String
+//             })
+
+// console.log(props.text)
 </script>
 
 <style scoped>
@@ -56,7 +62,7 @@ export default {
     border : solid 3px #000 ;
     border-radius : 40px ;
     background : var(--main_color) ;
-    font-family: 'Fredoka One', cursive;
+    font-family: 'Fredoka One';
 }
 .button::before{
     content : '' ;
@@ -102,11 +108,12 @@ export default {
 .button__text{
     position : relative ;
     z-index : 3 ;
-    font-size : 18px ;
+    font-size : 80% ;
     letter-spacing : 4px ;
     color : var(--base_color) ;
     transition : all .3s ease ;
     background: none;
+    /* white-space: normal; */
 }
 .character{
     position : relative ;

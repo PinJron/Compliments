@@ -12,7 +12,7 @@
     </div>
     <my-button 
       class="btn--compliment" 
-      @click="registerUser"
+      @click="loginUser"
     >
     {{ buttonText }}
     </my-button>
@@ -27,14 +27,13 @@ export default {
 
 <script setup>
 import {ref} from 'vue'
-import createUser from "@/providers/createUser";
-
+import logUser from "@/providers/logUser";
 const props = defineProps(['buttonText'])
 let login = ref(null)
 let password = ref(null)
 
-function registerUser() {
-  createUser(login, password);
+function loginUser() {
+  logUser(login, password);
 }
 </script>
 

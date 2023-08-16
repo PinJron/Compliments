@@ -2,13 +2,13 @@
 <div class='middle-wrapper'>
   <div class='like-wrapper'>
     <a class='like-button'
-    @click="likeButtonPressed"
-    :class="{liked: isLiked}">
+    @click="dislikeButtonPressed"
+    :class="{liked: isDisliked}">
       <span class='like-icon'>
         <div class='heart-animation-1'></div>
         <div class='heart-animation-2'></div>
       </span>
-      Like
+      DisLike
     </a>
   </div>
 </div>
@@ -17,10 +17,10 @@
 <script setup>
 import {ref} from 'vue'
 
-const isLiked = ref(false)
+const isDisliked = ref(false)
 
-function likeButtonPressed() {
-  isLiked.value = !isLiked.value
+function dislikeButtonPressed() {
+  isDisliked.value = !isDisliked.value
   // setTimeout(() => {
   //   isLiked.value = false
   // }, 1000)
@@ -29,7 +29,7 @@ function likeButtonPressed() {
 
 <script>
 export default {
-  name: 'my-like-button'
+  name: 'my-dislike-button'
 }
 </script>
 

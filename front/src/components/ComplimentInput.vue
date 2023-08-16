@@ -9,7 +9,7 @@
     <my-button 
     class="btn--compliment" 
     @click="pushCompliment">
-      PushPost
+    {{ buttonText }}
     </my-button>
   </div>
 </template>
@@ -25,7 +25,8 @@ import { ref } from 'vue'
 import createCompliment from "@/providers/createCompliment";
 
 let message = ref(null)
-
+const props = defineProps(['buttonText'])
+// let variable = ref("123")
 function pushCompliment() {
   if (createCompliment(message) == true) {
     message.value = ""
@@ -46,11 +47,14 @@ function pushCompliment() {
   background: none;
   height: fit-content;
   width: 70%;
-  font-family: 'Fredoka One', cursive;
+  font-family: 'Fredoka One';
   color: #e9b800
 }
 .input {
   margin-top: 5px;
+}
+.push__compliment {
+  width: 50%;
 }
 </style>
 

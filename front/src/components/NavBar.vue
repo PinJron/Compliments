@@ -4,8 +4,9 @@
   <BNavbarToggle target="nav-collapse" />
   <BCollapse id="nav-collapse" is-nav>
     <BNavbarNav>
-      <BNavItem href="/admin/">admin</BNavItem>
-      <BNavItem href="/register/">register</BNavItem>
+      <BNavItem href="/admin">admin</BNavItem>
+      <BNavItem href="/register">register</BNavItem>
+      <BNavItem href="/login">login</BNavItem>
       <!-- <BNavItem href="#" disabled>Disabled</BNavItem> -->
     </BNavbarNav>
     <!-- Right aligned nav items -->

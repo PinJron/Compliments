@@ -3,7 +3,7 @@ def register_user(_response, request)
   payload = JSON.parse(request.body.read, symbolize_names: true)
   candidate = User.find_by(username: payload[:username])
 
-  return { status: :error_user_exists }.to_json unless candidate
+  return { status: :error_user_exists }.to_json unless !candidate
 
   User.create(username: payload[:username],
               role_id: payload[:role_id],

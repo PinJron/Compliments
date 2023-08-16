@@ -20,6 +20,6 @@ import {RouterView} from "vue-router"
 }
 .home {
   text-align: center;
-  margin-top: 25%;
+  margin-top: 5%;
 }
 </style>

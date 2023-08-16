@@ -1,10 +1,13 @@
 <template>
   <nav-bar>
   </nav-bar>
+  <div class="line"></div>
   <div class="home">
-    <compliment-output>
+    <compliment-output
+    button-text = " Взять комплимент">>
     </compliment-output>
-    <compliment-input>
+    <compliment-input
+    button-text = "Создать комплимент">
     </compliment-input>
   </div>
 </template>
