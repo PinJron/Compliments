@@ -10,6 +10,8 @@ def register_user(_response, request)
               last_compliment_id: payload[:last_compliment_id],
               password: payload[:password])
 
+  session[:user_id] = user.id
+
   { status: :user_succesfully_register }.to_json
 end
 
@@ -60,7 +62,26 @@ end
 def get_my_user(_response, _request)
   user = User.find_by(id: session[:user_id])
 
-  return { status: :error_access_not_allowed }.to_json unless user
+  return { status: :error_you_are_not_logged_in }.to_json unless user
 
   user.to_json
+end
+
+def login_in?
+  user = User.find_by(id: session[:user_id])
+  return false unless user
+end
+
+def admin?
+  user = User.find_by(id: session[:user_id])
+  return false unless user.role_id == 1
+end
+
+def log_out(_response, _request)
+  user = User.find_by(id: session[:user_id])
+
+  return { status: :you_are_not_logged_in }.to_json unless user
+
+  session[:user_id] = nil
+  { status: :succesfully_logout }.to_json
 end

@@ -5,13 +5,13 @@
     >
     </my-output>
     <div class="buttons">
-      <my-like-button>
-      </my-like-button>
+      <!-- <my-like-button>
+      </my-like-button> -->
       <my-button class="btn--compliment" @click="getCompliment">
         {{ buttonText }}
       </my-button>
-      <my-dislike-button>
-      </my-dislike-button>
+      <!-- <my-dislike-button>
+      </my-dislike-button> -->
     </div>
   </div>
 </template>

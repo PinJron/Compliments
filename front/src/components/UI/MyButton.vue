@@ -62,7 +62,7 @@ export default {
     border : solid 3px #000 ;
     border-radius : 40px ;
     background : var(--main_color) ;
-    font-family: 'Fredoka One';
+    /* font-family: 'Fredoka One'; */
 }
 .button::before{
     content : '' ;

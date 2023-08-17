@@ -22,6 +22,10 @@ get '*/api/users/all' do
   get_all_users(response, request)
 end
 
+post '*/api/users/logout' do
+  log_out(response, request)
+end
+
 # delete '/api/users/delete' do
 #     delete_all_users()
 # end

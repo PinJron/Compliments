@@ -1,7 +1,7 @@
 <template>
   <div class="compliment__wrapper">
     <div class="compliment__text">
-        Комплимент: {{ compliment }}
+        {{ compliment }}
     </div>
   </div>
 </template>
@@ -31,17 +31,17 @@ const props = defineProps({
   border: 3px solid rgb(0, 0, 0);
   border-radius: 40px;
   position: relative;
-  font-size: 18px;
+  /* font-size: 18px; */
   letter-spacing: 4px;
   background: none;
   height: fit-content;
   min-width: 600px;
+  min-height: 52px;
   width: 90%;
-  font-family: 'Fredoka One';
+  /* font-family: 'Fredoka One', cursive; */
   color: #e9b800;
   display: flex;
   justify-content: center;
 }
 </style>
-    
     

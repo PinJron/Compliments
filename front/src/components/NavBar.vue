@@ -4,9 +4,9 @@
   <BNavbarToggle target="nav-collapse" />
   <BCollapse id="nav-collapse" is-nav>
     <BNavbarNav>
-      <BNavItem href="/admin">admin</BNavItem>
-      <BNavItem href="/register">register</BNavItem>
-      <BNavItem href="/login">login</BNavItem>
+      <BNavItem href="/admin">Admin</BNavItem>
+      <BNavItem href="/register">Register</BNavItem>
+      <BNavItem href="/login">Login</BNavItem>
       <!-- <BNavItem href="#" disabled>Disabled</BNavItem> -->
     </BNavbarNav>
     <!-- Right aligned nav items -->
@@ -22,8 +22,8 @@
         <template #button-content>
           <em>User</em>
         </template>
-        <BDropdownItem href="#">Profile</BDropdownItem>
-        <BDropdownItem href="#">Sign Out</BDropdownItem>
+        <BDropdownItem href="/profile">Profile</BDropdownItem>
+        <!-- <BDropdownItem href="">Sign Out</BDropdownItem> -->
       </BNavItemDropdown>
     </BNavbarNav>
     <!-- <BNavForm class="d-flex">
