@@ -1,6 +1,6 @@
 import axios from "axios";
 
-export default async function getUser() {
+export default async function getCurrentUser() {
   const response = await axios.get("/api/users/me");
   if (response.data.status == "error_access_not_allowed") {
     console.log("error_access_not_allowed")
