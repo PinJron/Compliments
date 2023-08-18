@@ -1,7 +1,7 @@
 <template>
   <div class="compliment__wrapper">
     <div class="compliment__text">
-        {{ compliment }}
+        {{ outputDataText }}
     </div>
   </div>
 </template>
@@ -15,7 +15,7 @@ export default {
 <script setup>
 const props = defineProps({
   // buttonText: String,
-  compliment: String
+  outputDataText: String
 })
 </script>
     
@@ -35,10 +35,9 @@ const props = defineProps({
   letter-spacing: 4px;
   background: none;
   height: fit-content;
-  min-width: 600px;
+  min-width: 300px;
   min-height: 52px;
   width: 90%;
-  /* font-family: 'Fredoka One', cursive; */
   color: #e9b800;
   display: flex;
   justify-content: center;

@@ -46,8 +46,8 @@ function pushCompliment() {
   letter-spacing: 4px;
   background: none;
   height: fit-content;
+  min-width: fit-content;
   width: 70%;
-  font-family: 'Fredoka One';
   color: #e9b800
 }
 .input {

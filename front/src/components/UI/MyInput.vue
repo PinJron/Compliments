@@ -29,7 +29,6 @@ export default {
   height: fit-content;
   min-width: 600px;
   width: 70%;
-  /* font-family: 'Fredoka One'; */
   color: #e9b800
 }
 .input {

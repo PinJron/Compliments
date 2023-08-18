@@ -1,7 +1,7 @@
 <template>
   <div class="fetch__compliment">
     <my-output
-    :compliment = "compliment"
+    :outputDataText = "compliment"
     >
     </my-output>
     <div class="buttons">

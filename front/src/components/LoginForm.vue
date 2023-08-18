@@ -1,12 +1,17 @@
 <template>
   <div class="register-form">
     <div class="input__wrapper">
-      <input class="register__input" 
+      <input 
+      class="register__input" 
       v-model="login" 
-      placeholder="Введите логин" />
+      placeholder="Введите логин"
+      autofocus />
     </div>
     <div class="input__wrapper">
-      <input class="register__input" 
+      <input 
+      type="password"
+      autocomplete="current-password"
+      class="register__input" 
       v-model="password" 
       placeholder="Введите пароль" />
     </div>
@@ -54,8 +59,8 @@ function loginUser() {
   letter-spacing: 4px;
   background: none;
   height: 60px;
+  min-width: fit-content;
   width: 30%;
-  font-family: 'Fredoka One', cursive;
   color: #e9b800;
   display: flex;
   justify-content: center;

@@ -7,6 +7,7 @@
       <BNavItem href="/admin">Admin</BNavItem>
       <BNavItem href="/register">Register</BNavItem>
       <BNavItem href="/login">Login</BNavItem>
+      <BNavItem href="/all_compliments">All</BNavItem>
       <!-- <BNavItem href="#" disabled>Disabled</BNavItem> -->
     </BNavbarNav>
     <!-- Right aligned nav items -->
@@ -23,7 +24,11 @@
           <em>User</em>
         </template>
         <BDropdownItem href="/profile">Profile</BDropdownItem>
-        <!-- <BDropdownItem href="">Sign Out</BDropdownItem> -->
+        <BDropdownItem
+        @click="signOut"
+        >
+        Sign Out
+        </BDropdownItem>
       </BNavItemDropdown>
     </BNavbarNav>
     <!-- <BNavForm class="d-flex">
@@ -41,7 +46,7 @@ export default {
 </script>
 
 <script setup>
-
+import signOut from "@/providers/signOut";
 </script>
 
 <style scoped>

@@ -3,6 +3,9 @@
   </nav-bar>
   <div class="line"></div>
   <div class="home">
+    <div class="nametag">
+      Ты жесткий тип
+    </div>
     <compliment-output
     button-text = " Взять комплимент">>
     </compliment-output>

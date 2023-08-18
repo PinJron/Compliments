@@ -3,10 +3,11 @@
   </nav-bar>
   <div class="line"></div>
   <div class="home">
-  <compliment-output
-  button-text = "Гони сюда!"
-  >
-  </compliment-output>
+    <div class="nametag">
+      Получить приятность
+    </div>
+    <compliment-output button-text="Гони сюда!">
+    </compliment-output>
   </div>
 </template>
 
@@ -17,15 +18,5 @@ const counter = useCounterStore()
 </script>
 
 <style>
-.line {
-    background-color: rgb(0, 0, 0); /* Цвет линии */
-    color: rgb(0, 0, 0); /* Цвет линии для IE6-7 */
-    height: 3px; /* Толщина линии */
-   }
-.home {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
 </style>
 

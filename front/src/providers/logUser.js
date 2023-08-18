@@ -16,13 +16,12 @@ export default async function logUser(resourseLogin, resoursePassword) {
       username: `${resourseLogin.value}`,
       password: `${resoursePassword.value}`,
     });
-    if (response.data.status == "error_wrong_password") {
-      alert(response.data.status)
-    } else if (response.data.status == "error_user_not_exists"){
-      alert(response.data.status)
+    if (response.data.status == "error_user_not_exists") {
+      alert("Пользователь не существует")
+    } else if (response.data.status == "error_wrong_password"){
+      alert("Неверный пароль")
     } else {
-      // alert(response.data.status)
-      alert("succesfully")
+      alert("Вы успешно вошли!")
     }
   }
 }
