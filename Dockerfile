@@ -25,8 +25,8 @@ RUN apt update -q && \
 ENV BUNDLER_VERSION='2.3.26'
 RUN gem install bundler --no-document -v '2.3.26'
 
-COPY back/Gemfile .
-COPY back/Gemfile.lock .
+COPY ror_back/Gemfile .
+COPY ror_back/Gemfile.lock .
 
 RUN bundle install
 
