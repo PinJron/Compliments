@@ -3,7 +3,7 @@
   <div class='like-wrapper'>
     <a class='like-button'
     @click="likeButtonPressed"
-    :class="{liked: isLiked}">
+    :class="{liked: CurrentCompliment.isLiked}">
       <span class='like-icon'>
         <div class='heart-animation-1'></div>
         <div class='heart-animation-2'></div>
@@ -16,6 +16,9 @@
 
 <script setup>
 import {ref} from 'vue'
+import { useCurrentComplimentStore } from '@/stores/CurrentCompliment'
+
+const CurrentCompliment = useCurrentComplimentStore()
 
 const isLiked = ref(false)
 
@@ -62,7 +65,6 @@ a {
   border-radius: 40px;
   padding: 0.45rem 0.75rem;
   color: #878787;
-  font-weight: bold;
   display: flex;
   align-items: center;
   justify-content: center;

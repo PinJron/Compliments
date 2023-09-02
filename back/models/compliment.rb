@@ -1,12 +1,15 @@
 class Compliment < ActiveRecord::Base
-  # validates_presence_of :name
-  validates :name, presence: true, length: { minimum: 10 }
-  # attribute :is_used, :boolean, default: false
-  before_create :set_is_used
+  scope :unused, -> { where(is_used: false) }
+  scope :random_order, -> { order('RANDOM()') }
+
+  validates :compliment_text, presence: true, length: { minimum: 10 }
+  before_create :set_defaults
 
   private
 
-  def set_is_used
+  def set_defaults
     self.is_used ||= false
+    self.dislikes ||= 0
+    self.likes ||= 0
   end
 end

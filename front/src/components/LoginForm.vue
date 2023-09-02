@@ -1,19 +1,19 @@
 <template>
-  <div class="register-form">
+  <div class="login-form">
     <div class="input__wrapper">
-      <input 
-      class="register__input" 
-      v-model="login" 
-      placeholder="Введите логин"
-      autofocus />
+      <my-input 
+      v-model.trim="login" 
+      :inputDataText="'Введите логин'"
+      autofocus 
+      />
     </div>
     <div class="input__wrapper">
-      <input 
+      <my-input 
       type="password"
       autocomplete="current-password"
-      class="register__input" 
-      v-model="password" 
-      placeholder="Введите пароль" />
+      v-model.trim="password" 
+      :inputDataText="'Введите пароль'" 
+      />
     </div>
     <my-button 
       class="btn--compliment" 
@@ -32,13 +32,19 @@ export default {
 
 <script setup>
 import {ref} from 'vue'
-import logUser from "@/providers/logUser";
+import { storeToRefs } from 'pinia'
+import { useCurrentUserStore } from '@/stores/CurrentUser'
+
+const CurrentUser = useCurrentUserStore()
+const { currentUser, isLoading } = storeToRefs(CurrentUser)
+
 const props = defineProps(['buttonText'])
-let login = ref(null)
-let password = ref(null)
+
+let login = ref("")
+let password = ref("")
 
 function loginUser() {
-  logUser(login, password);
+  CurrentUser.loginCurrentUser(login, password);
 }
 </script>
 
@@ -50,7 +56,7 @@ function loginUser() {
   flex-direction: column;
   align-items: center;
 }
-.register__input {
+.login__input {
   padding: 10px 15px;
   border: 3px solid rgb(0, 0, 0);
   border-radius: 40px;
@@ -68,7 +74,7 @@ function loginUser() {
 .btn--compliment {
   width: 50px;
 }
-.register-form {
+.login-form {
   margin-top: 50px;
   display: flex;
   flex-direction: column;

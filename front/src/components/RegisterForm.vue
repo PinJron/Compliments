@@ -1,18 +1,19 @@
 <template>
   <div class="register-form">
     <div class="input__wrapper">
-      <input class="register__input" 
+      <my-input
       v-model="login" 
-      placeholder="Введите логин"
-      autofocus />
+      autofocus
+      :inputDataText="'Введите логин'"
+      />
     </div>
     <div class="input__wrapper">
-      <input 
+      <my-input
       type="password"
       autocomplete="current-password"
-      class="register__input" 
       v-model="password" 
-      placeholder="Введите пароль" />
+      :inputDataText="'Введите пароль'" 
+      />
     </div>
     <my-button 
       class="btn--compliment" 
@@ -31,14 +32,19 @@ export default {
 
 <script setup>
 import {ref} from 'vue'
-import createUser from "@/providers/createUser";
+import { storeToRefs } from 'pinia'
+import { useCurrentUserStore } from '@/stores/CurrentUser'
 
 const props = defineProps(['buttonText'])
-let login = ref(null)
-let password = ref(null)
+
+const CurrentUser = useCurrentUserStore()
+const { currentUser } = storeToRefs(CurrentUser)
+
+let login = ref("")
+let password = ref("")
 
 function registerUser() {
-  createUser(login, password);
+  CurrentUser.createCurrentUser(login, password);
 }
 </script>
 

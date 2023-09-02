@@ -1,7 +1,7 @@
 <template>
   <div class="compliment__wrapper">
     <div class="compliment__text">
-        {{ outputDataText }}
+        {{ outputDataText == undefined ? placeholder : outputDataText }}
     </div>
   </div>
 </template>
@@ -14,8 +14,8 @@ export default {
     
 <script setup>
 const props = defineProps({
-  // buttonText: String,
-  outputDataText: String
+  outputDataText: String,
+  placeholder: String
 })
 </script>
     
@@ -31,13 +31,12 @@ const props = defineProps({
   border: 3px solid rgb(0, 0, 0);
   border-radius: 40px;
   position: relative;
-  /* font-size: 18px; */
+  font-size: 18px;
   letter-spacing: 4px;
   background: none;
   height: fit-content;
   min-width: 300px;
   min-height: 52px;
-  width: 90%;
   color: #e9b800;
   display: flex;
   justify-content: center;

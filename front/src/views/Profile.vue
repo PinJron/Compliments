@@ -3,58 +3,33 @@
   </nav-bar>
   <div class="line"></div>
   <div class="home">
-    <div v-if="!username">
-      <div class="nametag">
-        Сначала надо залогиниться!
-      </div>
-      <!-- <my-button @click="getMyUser">
-    </my-button> -->
+    <div v-if="!currentUser?.username" class="nametag">
+      Сначала надо залогиниться!
     </div>
-    <div v-if="username">
+    <div v-if="currentUser?.username">
       <div class="nametag">
-        Привет {{ username }}!
+        Привет {{ currentUser.username }}!
       </div>
       <label for="my-output">Твой логин</label>
-      <my-output :outputDataText="username">
+      <my-output :outputDataText="currentUser.username">
       </my-output>
-      <label for="my-output">Soon</label>
-      <my-output :outputDataText="'Soon'">
+      <label for="my-output">role_id</label>
+      <my-output :outputDataText="currentUser.role_id">
       </my-output>
-      <label for="my-output">Soon</label>
-      <my-output :outputDataText="'Soon'">
-      </my-output>
+      <!-- <label for="my-output">password_digest</label>
+      <my-output :outputDataText="currentUser.password_digest">
+      </my-output> -->
     </div>
-    <!-- <my-button @click="getMyUser">
-    </my-button> -->
   </div>
 </template>
 
 <script setup>
-import { ref, onBeforeMount } from 'vue'
-import getCurrentUser from "@/providers/getCurrentUser";
+import { useCurrentUserStore } from '@/stores/CurrentUser'
+import { storeToRefs } from 'pinia'
 
-let user = ref(null)
-
-async function getMyUser() {
-  user = await getCurrentUser()
-  // console.log(user + "123")
-}
-
-// let answer = await getCurrentUser()
-// if (answer == "error_access_not_allowed") {
-//   el = "mama"
-//   console.log("mama")
-// }
-// else {
-//   el = answer
-//   console.log("papa")
-// }
-
-</script>
-
-<script>
-let username = ref("")
-username = await getCurrentUser()
+const CurrentUser = useCurrentUserStore()
+const { currentUser, isLoading } = storeToRefs(CurrentUser)
+console.log(currentUser)
 </script>
 
 <style>
@@ -64,4 +39,3 @@ username = await getCurrentUser()
   align-items: center;
 }
 </style>
-  

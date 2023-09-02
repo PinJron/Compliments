@@ -9,5 +9,5 @@ export default [
   MyLikeButton,
   MyDislikeButton,
   MyInput,
-  MyOutput
+  MyOutput,
 ]

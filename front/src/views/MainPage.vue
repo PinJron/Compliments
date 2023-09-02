@@ -4,19 +4,24 @@
   <div class="line"></div>
   <div class="home">
     <div class="nametag">
-      Получить приятность
+      Получить комплимент
     </div>
-    <compliment-output button-text="Гони сюда!">
+    <compliment-output 
+    button-text="Гони сюда!">
     </compliment-output>
+    <compliment-input
+    button-text = "Создать комплимент">
+    </compliment-input>
   </div>
 </template>
 
 <script setup>
-import { useCounterStore } from '@/stores/counter';
-
-const counter = useCounterStore()
 </script>
 
 <style>
+.btn--compliment {
+  margin-top: 5px;
+  font-size: 20px;
+}
 </style>
 

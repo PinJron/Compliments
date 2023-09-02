@@ -1,11 +1,13 @@
 import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap-vue-next/dist/bootstrap-vue-next.css'
+import axios from "axios"
+import { createPinia } from 'pinia'
 import { createApp } from 'vue'
 import App from './App.vue'
 import router from './router'
 import componentsUI from './components/UI';
 import components from './components';
-import { createPinia } from 'pinia'
+import { useCurrentUserStore } from '@/stores/CurrentUser'
 // import store from './store'
 
 const pinia = createPinia()
@@ -20,8 +22,15 @@ components.forEach(component => {
 })
 
 // app = createApp(App).use(store).use(router).mount('#app')
+const ax = axios.create({
+  baseURL: '',
+  withCredentials: true,
+});
+export default ax;
 
 app
   .use(pinia)
   .use(router)
   .mount('#app')
+  
+// const CurrentUser = useCurrentUserStore()

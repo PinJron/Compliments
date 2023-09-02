@@ -1,16 +1,28 @@
 <template>
   <div class="fetch__compliment">
     <my-output
-    :outputDataText = "compliment"
+    :outputDataText = "CurrentCompliment.currentCompliment.compliment_text"
+    :placeholder = "'Ткни кнопку'"
     >
     </my-output>
-    <div class="buttons">
-      <!-- <my-like-button>
-      </my-like-button> -->
-      <my-button class="btn--compliment" @click="getCompliment">
+    <div class="buttons"
+    v-bind:style= "[CurrentCompliment.currentCompliment.compliment_text ? {'left': '-39.5px'} : {}]"
+    >
+      <my-like-button
+      v-if="CurrentCompliment.currentCompliment.compliment_text"
+      @click="rateCompliment"
+      >
+      </my-like-button>
+      <my-button
+      class="btn--compliment" 
+      @click="getCompliment"
+      >
         {{ buttonText }}
       </my-button>
-      <!-- <my-dislike-button>
+      <!-- <my-dislike-button
+      v-if="CurrentCompliment.currentCompliment.compliment_text"
+      @click="rateCompliment"
+      >
       </my-dislike-button> -->
     </div>
   </div>
@@ -24,16 +36,28 @@ export default {
 
 <script setup>
 import { ref } from 'vue'
-import fetchRandomCompliment from "@/providers/fetchRandomCompliment";
+import { useCurrentComplimentStore } from '@/stores/CurrentCompliment'
+
+const CurrentCompliment = useCurrentComplimentStore()
+
+// CurrentCompliment.getCurrentCompliment()
 
 const props = defineProps({
   buttonText: String,
 })
 
-const compliment = ref(null)
-
 function getCompliment() {
-  fetchRandomCompliment(compliment);
+  CurrentCompliment.getCurrentCompliment()
+}
+
+function rateCompliment() {
+  if (CurrentCompliment.isLiked == false) {
+    CurrentCompliment.rateCurrentCompliment("like")
+    CurrentCompliment.isLiked = !CurrentCompliment.isLiked
+  } else {
+    CurrentCompliment.rateCurrentCompliment("unlike")
+    CurrentCompliment.isLiked = !CurrentCompliment.isLiked
+  }
 }
 
 </script>
@@ -42,7 +66,10 @@ function getCompliment() {
 .buttons {
   display: flex;
   flex-direction: row;
-  align-items: center;
+  align-items: baseline;
+  position: relative;
+  /* top: -10px; */
+  /* left: -40px; */
   /* width: 70%; */
 }
 
@@ -52,10 +79,6 @@ function getCompliment() {
   display: flex;
   flex-direction: column;
   align-items: center;
-}
-
-.btn--compliment {
-  margin-top: 5px;
 }
 </style>
 

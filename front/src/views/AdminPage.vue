@@ -7,7 +7,7 @@
       Ты жесткий тип
     </div>
     <compliment-output
-    button-text = " Взять комплимент">>
+    button-text = "Взять комплимент">>
     </compliment-output>
     <compliment-input
     button-text = "Создать комплимент">
@@ -16,6 +16,7 @@
 </template>
 
 <script setup>
+
 </script>
 
 <style scoped>

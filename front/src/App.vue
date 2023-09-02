@@ -37,6 +37,9 @@ import {RouterView} from "vue-router"
   height: 3px;
   /* Толщина линии */
 }
+.dropdown-menu {
+  --bs-dropdown-bg: #e9b800;
+}
 
 @font-face {
     font-family: 'Flow Ext';

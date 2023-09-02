@@ -7,7 +7,7 @@ class User < ActiveRecord::Base
   has_secure_password
 
   def admin?
-    return true if role_id == 1
+    role_id == 1
   end
 
   private

@@ -62,7 +62,6 @@ a {
   border-radius: 40px;
   padding: 0.45rem 0.75rem;
   color: #878787;
-  font-weight: bold;
   display: flex;
   align-items: center;
   justify-content: center;

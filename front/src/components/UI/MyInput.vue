@@ -2,8 +2,9 @@
   <div class="input">
     <input 
     class="input--compliment" 
-    v-model="message" 
-    placeholder="Введите комплимент" />
+    :value="modelValue" 
+    @input="$emit('update:modelValue', $event.target.value)"
+    :placeholder="`${inputDataText}`" />
   </div>
 </template>
   
@@ -15,6 +16,17 @@ export default {
   
 <script setup>
 
+
+const props = defineProps({
+  inputDataText: String,
+  modelValue: String
+})
+
+defineEmits(['update:modelValue'])
+
+// const emits = defineEmits({
+//   update: message
+// })
 </script>
   
 <style scoped>
@@ -23,16 +35,20 @@ export default {
   border: 3px solid rgb(0, 0, 0);
   border-radius: 40px;
   position: relative;
-  font-size: 18px;
   letter-spacing: 4px;
+  font-size: 18px;
   background: none;
   height: fit-content;
-  min-width: 600px;
-  width: 70%;
-  color: #e9b800
+  min-width: 300px;
+  min-height: 52px;
+  color: #e9b800;
+  display: flex;
+  justify-content: center;
 }
+
 .input {
   margin-top: 5px;
-}</style>
+}
+</style>
   
   

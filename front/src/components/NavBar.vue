@@ -1,29 +1,34 @@
 <template>
   <BNavbar toggleable="lg" type="light" variant="dark">
-  <BNavbarBrand href="/">Главная</BNavbarBrand>
+  <BNavbarBrand to="/">Главная</BNavbarBrand>
   <BNavbarToggle target="nav-collapse" />
   <BCollapse id="nav-collapse" is-nav>
     <BNavbarNav>
-      <BNavItem href="/admin">Admin</BNavItem>
-      <BNavItem href="/register">Register</BNavItem>
-      <BNavItem href="/login">Login</BNavItem>
-      <BNavItem href="/all_compliments">All</BNavItem>
+      <BNavItem v-if="currentUser?.role_id !=2" class="link" to="/admin">Admin</BNavItem>
+      <BNavItem v-if="!currentUser?.username" class="link" to="/register">Register</BNavItem>
+      <BNavItem 
+      v-if="!currentUser?.username"
+      class="link" 
+      to="/login"
+      >
+      Login</BNavItem>
+      <BNavItem class="link" to="/all_compliments">All</BNavItem>
       <!-- <BNavItem href="#" disabled>Disabled</BNavItem> -->
     </BNavbarNav>
     <!-- Right aligned nav items -->
     <BNavbarNav class="me-auto mb-2 mb-lg-0">
       <!-- <BNavItemDropdown text="Lang" right>
-        <BDropdownItem href="#">EN</BDropdownItem>
-        <BDropdownItem href="#">ES</BDropdownItem>
-        <BDropdownItem href="#">RU</BDropdownItem>
-        <BDropdownItem href="#">FA</BDropdownItem>
+        <BDropdownItem to="#">EN</BDropdownItem>
+        <BDropdownItem to="#">ES</BDropdownItem>
+        <BDropdownItem to="#">RU</BDropdownItem>
+        <BDropdownItem to="#">FA</BDropdownItem>
       </BNavItemDropdown> -->
-      <BNavItemDropdown right>
+      <BNavItemDropdown v-if="currentUser?.username" right>
         <!-- Using 'button-content' slot -->
         <template #button-content>
-          <em>User</em>
+          <em>{{currentUser.username}}</em>
         </template>
-        <BDropdownItem href="/profile">Profile</BDropdownItem>
+        <BDropdownItem to="/profile">Profile</BDropdownItem>
         <BDropdownItem
         @click="signOut"
         >
@@ -46,7 +51,16 @@ export default {
 </script>
 
 <script setup>
-import signOut from "@/providers/signOut";
+import { storeToRefs } from 'pinia'
+import { useCurrentUserStore } from '@/stores/CurrentUser'
+
+const CurrentUser = useCurrentUserStore()
+const { currentUser, isLoading } = storeToRefs(CurrentUser)
+function signOut() {
+  CurrentUser.signOutCurrentUser()
+}
+
+console.log(currentUser)
 </script>
 
 <style scoped>
