@@ -3,7 +3,6 @@ services:
     image: ghcr.io/pinjron/compliments
     container_name: "site"
     command: bundle exec rails s -b 0.0.0.0
-    restart: "no"
     stdin_open: true
     tty: true
     volumes:
