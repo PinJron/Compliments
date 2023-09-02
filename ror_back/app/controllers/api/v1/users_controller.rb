@@ -60,14 +60,10 @@ module Api
       end
 
       def me
-        authorize_user!
-
         @user = current_user
       end
 
       def logout
-        authorize_user!
-
         session[:user_id] = nil
 
         respond_with_success(:succesfully_logout)

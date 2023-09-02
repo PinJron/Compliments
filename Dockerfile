@@ -31,9 +31,11 @@ COPY back/Gemfile.lock .
 RUN bundle install
 
 # Настройка переменных окружения для production
-ENV RACK_ENV=production
+ENV RAILS_ENV=production
+ENV RAILS_SERVE_STATIC_FILES=true
+ENV RAILS_LOG_TO_STDOUT=true
 
-COPY ./back .
+COPY ./ror_back .
 
 # Copy static assets from builder stage
 COPY --from=builder /app/dist ./public

@@ -15,10 +15,6 @@ jobs:
       run: |
         echo $CR_PAT | docker login ghcr.io -u PinJron --password-stdin
 
-    - name: Pull docker image
-      run: |
-        docker pull ghcr.io/pinjron/compliments:latest
-
     - name: Build the Docker image
       run: |
         docker build . -t ghcr.io/pinjron/compliments:latest --target ruby
@@ -43,3 +39,4 @@ jobs:
         DOCKER_HOST: ssh://${{ secrets.STAGING_USER }}@${{ secrets.STAGING_HOST }}
       run: |
         docker stack deploy --compose-file ${{ github.workspace }}/docker-compose-prod.yml --with-registry-auth gtm-compliments
+        docker system prune -a --volumes
