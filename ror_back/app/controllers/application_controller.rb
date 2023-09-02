@@ -12,7 +12,7 @@ class ApplicationController < ActionController::API
   end
 
   def respond_with_error(error, status = 400)
-    render json: { status: error }, status:
+    render json: { status: error }, status: status
   end
 
   def respond_with_success(data, status = 200)

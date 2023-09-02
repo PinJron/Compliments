@@ -191,6 +191,11 @@ GEM
       rexml (~> 3.2, >= 3.2.5)
       rubyzip (>= 1.2.2, < 3.0)
       websocket (~> 1.0)
+    sentry-rails (5.10.0)
+      railties (>= 5.0)
+      sentry-ruby (~> 5.10.0)
+    sentry-ruby (5.10.0)
+      concurrent-ruby (~> 1.0, >= 1.0.2)
     sprockets (4.2.0)
       concurrent-ruby (~> 1.0)
       rack (>= 2.2.4, < 4)
@@ -242,6 +247,8 @@ DEPENDENCIES
   rake
   rspec
   selenium-webdriver
+  sentry-rails
+  sentry-ruby
   sprockets-rails
   sqlite3 (~> 1.4)
   stimulus-rails
@@ -249,9 +256,6 @@ DEPENDENCIES
   tzinfo-data
   web-console
   webdrivers
-
-RUBY VERSION
-   ruby 3.2.2p53
 
 BUNDLED WITH
    2.4.10
