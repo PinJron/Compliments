@@ -2,6 +2,8 @@ services:
   website:
     image: ghcr.io/pinjron/compliments
     container_name: "site"
+    environment:
+       SECRET_KEY_BASE: /run/secrets/secret_key_base
     command: bundle exec rails s -b 0.0.0.0
     stdin_open: true
     tty: true
@@ -13,25 +15,23 @@ services:
     - "traefik.http.routers.qwe.entrypoints=websecure"
     - "traefik.http.routers.qwe.tls.certresolver=myresolver"
     - "traefik.http.services.qwe.loadbalancer.server.port=3000"
+    secrets:
+      - secret_key_base
 
 
   migration:
     restart: on-failure
     image: ghcr.io/pinjron/compliments
     container_name: "migrations"
-    # build:
-    #   context: .
-    #   target: ruby
+    environment:
+       SECRET_KEY_BASE: /run/secrets/secret_key_base
     command: bundle exec rails db:prepare
-    # ports:
-    #   - target: 3000
-    #     published: 3000
-    #     protocol: tcp
-    #     mode: host
     stdin_open: true
     tty: true
     volumes:
       - db:/app/db_data/:rw
+    secrets:
+      - secret_key_base
 
   traefik:
     image: "traefik:v2.10"
@@ -55,3 +55,7 @@ services:
 volumes:
   db:
   letsencrypt:
+
+secrets:
+  secret_key_base:
+    external: true
