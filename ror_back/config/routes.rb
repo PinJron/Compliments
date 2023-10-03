@@ -9,32 +9,40 @@ Rails.application.routes.draw do
   namespace :api do
     namespace :v1 do
       resources :users, only: [] do
+        resources :compliments, only: %i[show index]
+
         collection do
-          get :me
           get :all
+          get :me
+          get '/:name', to: 'users#profile'
 
           post :register
           post :login
           post :logout
 
           patch :update
+        end
 
+        member do
           delete :delete
         end
       end
 
-      resources :compliments, only: %i[delete show] do
+      resources :compliments, only: %i[destroy] do
         collection do
-          root to: 'compliments#get_sorted'
-          get :random, to: 'compliments#get_random'
+          get :random, to: 'compliments#random'
+          get '/sorted', to: 'compliments#sorted'
+
           post '/create', to: 'compliments#create'
-          delete '/', to: 'compliments#delete_all'
+
+          delete '/all', to: 'compliments#destroy_all'
         end
 
         member do
           patch :like
           patch :unlike
           patch :dislike
+          patch :undislike
         end
       end
     end

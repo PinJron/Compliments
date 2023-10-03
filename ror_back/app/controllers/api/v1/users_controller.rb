@@ -6,9 +6,9 @@ module Api
       before_action :authorize_admin!, only: %i[update delete all]
 
       def login
-        permit_params!(:username, :password)
+        permit_params!(:name, :password)
 
-        @user = find_user_by_username(permitted_params)
+        @user = find_user_by_name(permitted_params)
 
         return respond_with_error(:error_user_not_exists) unless @user
         return respond_with_error(:error_wrong_password) unless @user.authenticate(permitted_params[:password])
@@ -17,9 +17,9 @@ module Api
       end
 
       def register
-        permit_params!(:username, :password)
+        permit_params!(:name, :password)
 
-        if User.where(username: permitted_params[:username]).exists?
+        if User.where(name: permitted_params[:name]).exists?
           return respond_with_error(:error_user_exists)
         end
 
@@ -31,10 +31,10 @@ module Api
       end
 
       def update
-        candidate_params = %i[username role_id last_compliment_id password]
+        candidate_params = %i[name role_id last_compliment_id password]
         permit_params!(*candidate_params)
 
-        candidate = find_user_by_username(permitted_params)
+        candidate = find_user_by_name(permitted_params)
 
         return respond_with_error(:error_user_not_exists) unless candidate
 
@@ -43,10 +43,10 @@ module Api
         @user = candidate
       end
 
-      def delete
-        permit_params!(:username)
+      def destroy
+        permit_params!(:name)
 
-        candidate = find_user_by_username(permitted_params)
+        candidate = find_user_by_name(permitted_params)
 
         return respond_with_error(:error_user_not_exists) unless candidate
 
@@ -63,6 +63,14 @@ module Api
         @user = current_user
       end
 
+      def profile
+        permit_params!(:name)
+
+        @user = find_user_by_name(permitted_params)
+
+        respond_with_error(:error_user_not_found) unless @user
+      end
+
       def logout
         session[:user_id] = nil
 
@@ -71,8 +79,8 @@ module Api
 
       private
 
-      def find_user_by_username(data)
-        User.find_by(username: data[:username])
+      def find_user_by_name(data)
+        User.find_by(name: data[:name])
       end
     end
   end

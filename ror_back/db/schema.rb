@@ -10,21 +10,25 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_08_29_202009) do
+ActiveRecord::Schema[7.0].define(version: 2023_09_06_153925) do
   create_table "compliments", force: :cascade do |t|
+    t.integer "user_id"
     t.string "compliment_text"
     t.boolean "is_used"
     t.integer "likes"
     t.integer "dislikes"
     t.datetime "created_at"
-    t.integer "created_by_id"
+    t.index ["user_id"], name: "index_compliments_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|
-    t.string "username"
+    t.string "name"
+    t.string "email"
     t.integer "role_id"
     t.integer "last_compliment_id"
     t.string "password_digest"
+    t.datetime "created_at"
   end
 
+  add_foreign_key "compliments", "users"
 end

@@ -1,100 +1,148 @@
 module Api
   module V1
     class ComplimentsController < ApplicationController
-      before_action :authorize_user!, only: %i[create]
+      before_action :authorize_user!, only: %i[create delete]
+      before_action :authorize_admin!, only: %i[destroy_all]
+
+      def index
+        permit_params!(:id, :user_id)
+
+        user = find_user_by_user_id(permitted_params)
+
+        return respond_with_error(:error_user_not_found) unless user
+
+        @all_compliments = user.compliments.all
+
+        respond_with_error(:error_compliments_not_found) unless @all_compliments
+      end
 
       def show
-        compliment = Compliment.find_by(id: params[:id].to_i)
+        permit_params!(:id, :user_id)
 
-        return response = { status: :error_compliment_not_found }.to_json unless compliment
+        user = find_user_by_user_id(permitted_params)
 
-        if compliment.is_used == true
-          response = { status: :is_used }.to_json
-        else
-          compliment.update!(is_used: true)
-          response = { status: :ok }.merge!(compliment.attributes).to_json
-        end
-        render plain: response
+        @compliment = user.compliments.offset(permitted_params['id']).first
+
+        respond_with_error(:error_compliment_not_found) unless @compliment
       end
 
-      def get_random
-        compliment = Compliment.unused.random_order.first
+      def random
+        @compliment = Compliment.unused.random_order.first
 
-        return response = { status: :error_compliment_not_found }.to_json unless compliment
-
-        compliment.update!(is_used: true)
-        response = { status: :ok }.merge!(compliment.attributes).to_json
-        render plain: response
+        respond_with_error(:error_compliment_not_found) unless @compliment
       end
 
-      def get_sorted
-        compliments = Compliment.all
-        compliments = compliments.limit(params['limit']) if params['limit'] != 0
-        compliments = compliments.offset(params['offset']) if params['offset'] != 0
-        compliments = compliments.order(likes: :desc) if params['sorted_by'] == 'max-liked'
-        compliments = compliments.order(:likes) if params['sorted_by'] == 'min-liked'
-        response = compliments.to_json
-        render plain: response
+      def sorted
+        permit_params!(:limit, :offset, :sorted_by)
+        @all_compliments = Compliment.all
+        @all_compliments = @all_compliments.limit(permitted_params['limit']) if permitted_params['limit'] != 0
+        @all_compliments = @all_compliments.offset(permitted_params['offset']) if permitted_params['offset'] != 0
+        @all_compliments = @all_compliments.order(likes: :desc) if permitted_params['sorted_by'] == 'max-liked'
+        @all_compliments = @all_compliments.order(:likes) if permitted_params['sorted_by'] == 'min-liked'
+        @all_compliments = @all_compliments.order(:compliment_text) if permitted_params['sorted_by'] == 'name'
       end
 
       def create
         permit_params!(:compliment)
 
-        @compliment = Compliment.create(compliment_text: params[:compliment],
-                                       created_by_id: current_user.id)
+        @compliment = @current_user.compliments.create!(compliment_text: permitted_params[:compliment])
 
+        respond_with_error(:error_can_not_create_compliments) unless @compliment
       end
 
-      def delete
-        compliment = Compliment.find_by(id: params['id'].to_i)
+      def destroy
+        @compliment = Compliment.find_by_id(params['id'])
 
-        return response = { status: :error_you_are_not_logged_in }.to_json unless current_user
+        puts @compliment.inspect
 
-        return response = { status: :error_compliments_not_exist }.to_json unless compliment
+        return respond_with_error(:error_compliment_not_exist) unless @compliment
 
-        response = compliment.destroy.to_json
-        render plain: response
+        @compliment.destroy.to_json
       end
 
-      def delete_all
-        return response = { status: :error_you_are_not_logged_in }.to_json unless current_user
+      def destroy_all
+        return respond_with_error(:error_access_not_allowed) unless @current_user.admin?
 
-        response = { status: :error_access_not_allowed }.to_json unless current_user.admin?
-        render plain: response
         # это работает, но ради безопасности закоменчено
-        # Compliment.destroy_all
+        Compliment.destroy_all
       end
 
       def like
-        compliment = Compliment.find_by(id: params['id'].to_i)
-        return { status: :error_compliment_not_found }.to_json unless compliment
+        permit_params!(:id)
+
+        @compliment = find_compliment_by_id(params['id'])
+
+        return respond_with_error(:error_compliment_not_found) unless @compliment
 
         Compliment
-          .where(id: params['id'].to_i)
+          .where(id: params['id'])
           .update_all('likes = likes + 1')
 
-        response = compliment.likes.to_json
-        render plain: response
+        @compliment = find_compliment_by_id(params['id'])
       end
 
       def unlike
-        compliment = Compliment.find_by(id: params['id'].to_i)
-        return { status: :error_compliment_not_found }.to_json unless compliment
+        permit_params!(:id)
 
-        compliment.likes -= 1
-        compliment.save!
-        response = compliment.likes.to_json
-        render plain: response
+        @compliment = find_compliment_by_id(params['id'])
+
+        return respond_with_error(:error_compliment_not_found) unless @compliment
+
+        Compliment
+          .where(id: params['id'])
+          .update_all('likes = likes - 1')
+
+        @compliment = find_compliment_by_id(params['id'])
       end
 
       def dislike
-        compliment = Compliment.find_by(id: params['id'].to_i)
-        return { status: :error_compliment_not_found }.to_json unless compliment
+        permit_params!(:id)
 
-        compliment.dislikes += 1
-        compliment.save!
-        response = compliment.dislikes.to_json
-        render plain: response
+        @compliment = find_compliment_by_id(params['id'])
+
+        return respond_with_error(:error_compliment_not_found) unless @compliment
+
+        Compliment
+          .where(id: params['id'])
+          .update_all('dislikes = dislikes + 1')
+
+        @compliment = find_compliment_by_id(params['id'])
+      end
+
+      def undislike
+        permit_params!(:id)
+
+        @compliment = find_compliment_by_id(params['id'])
+
+        return respond_with_error(:error_compliment_not_found) unless @compliment
+
+        Compliment
+          .where(id: params['id'])
+          .update_all('dislikes = dislikes - 1')
+
+        @compliment = find_compliment_by_id(params['id'])
+      end
+
+      def created_by
+        permit_params!(:name)
+
+        user = find_user_by_name(permitted_params)
+
+        @compliments = user.compliments.all
+      end
+
+      private
+
+      def find_compliment_by_id(id)
+        Compliment.find_by(id: id.to_i)
+      end
+
+      def find_user_by_name(data)
+        User.find_by(name: data[:name])
+      end
+
+      def find_user_by_user_id(data)
+        User.find_by(name: data[:user_id])
       end
     end
   end

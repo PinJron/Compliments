@@ -19,7 +19,7 @@ import fetchCompliments from "@/providers/compliments/fetchCompliments";
 const LIMIT = 10
 const OFFSET = 2
 
-let complimentsArray = await fetchCompliments("most-liked", LIMIT, OFFSET)
+let complimentsArray = await fetchCompliments("max-liked", LIMIT, OFFSET)
 </script>
 
 <style>
