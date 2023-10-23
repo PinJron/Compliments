@@ -36,7 +36,7 @@ jobs:
 
     - name: Deploy image
       env:
-        DOCKER_HOST: ssh://root@$dizeldigital.ru
+        DOCKER_HOST: ssh://root@dizeldigital.ru
       run: |
         docker stack deploy --compose-file ${{ github.workspace }}/docker-compose-prod.yml --with-registry-auth gtm-compliments
         docker system prune -a --volumes
