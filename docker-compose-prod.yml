@@ -11,7 +11,7 @@ services:
       - db:/app/db_data/:rw
     labels:
     - "traefik.enable=true"
-    - "traefik.http.routers.qwe.rule=Host(`dizeldigital.ru`)"
+    - "traefik.http.routers.qwe.rule=Host(`45.9.73.187`)"
     - "traefik.http.routers.qwe.entrypoints=websecure"
     - "traefik.http.routers.qwe.tls.certresolver=myresolver"
     - "traefik.http.services.qwe.loadbalancer.server.port=3000"
