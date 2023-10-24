@@ -15,7 +15,7 @@ export default async function createUser(resourseLogin, resoursePassword) {
     console.log(`password: ${resoursePassword.value}`);
 
     let response = await axios.post("/api/v1/users/register", {
-      username: `${resourseLogin.value}`,
+      name: `${resourseLogin.value}`,
       password: `${resoursePassword.value}`,
     });
 

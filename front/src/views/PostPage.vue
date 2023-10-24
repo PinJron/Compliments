@@ -4,7 +4,7 @@
   <div class="line"></div>
   <div class="home">
     <div>
-      <my-compliment class="complim" v-for="item in complimentsArray" :outputDataText="item.compliment_text">
+      <my-compliment class="complim" v-for="item in complimentsArray" :outputDataText="item.compliment">
       </my-compliment>
     </div>
   </div>

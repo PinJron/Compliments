@@ -1,15 +1,15 @@
 <template>
   <div class="fetch__compliment">
     <my-output
-    :outputDataText = "CurrentCompliment.currentCompliment.compliment_text"
+    :outputDataText = "CurrentCompliment.currentCompliment.compliment"
     :placeholder = "'Ткни кнопку'"
     >
     </my-output>
     <div class="buttons"
-    v-bind:style= "[CurrentCompliment.currentCompliment.compliment_text ? {'left': '-39.5px'} : {}]"
+    v-bind:style= "[CurrentCompliment.currentCompliment.compliment ? {'left': '-39.5px'} : {}]"
     >
       <my-like-button
-      v-if="CurrentCompliment.currentCompliment.compliment_text"
+      v-if="CurrentCompliment.currentCompliment.compliment"
       @click="rateCompliment"
       >
       </my-like-button>
