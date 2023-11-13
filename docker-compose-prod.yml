@@ -11,12 +11,15 @@ services:
       - db:/app/db_data/:rw
     labels:
     - "traefik.enable=true"
+    - "traefik.docker.network=traefik-public"
     - "traefik.http.routers.qwe.rule=Host(`wol.dizeldigital.ru`)"
     - "traefik.http.routers.qwe.entrypoints=websecure"
     - "traefik.http.routers.qwe.tls.certresolver=myresolver"
     - "traefik.http.services.qwe.loadbalancer.server.port=3000"
     secrets:
       - secret_key_base
+    networks:
+      - traefik-public
 
 
   migration:
@@ -37,11 +40,18 @@ services:
     image: "traefik:v2.10"
     container_name: "traefik"
     command:
-      #- "--log.level=DEBUG"
+      - "--log"
       - "--api.insecure=true"
       - "--providers.docker=true"
       - "--providers.docker.exposedbydefault=false"
+      - "--providers.docker.network=traefik-public"
+
+      - "--entrypoints.web.address=:80"
+      - "--entrypoints.web.http.redirections.entrypoint.to=websecure"
+      - "--entrypoints.web.http.redirections.entrypoint.scheme=https"
+      - "--entrypoints.web.http.redirections.entrypoint.permanent=true"
       - "--entrypoints.websecure.address=:443"
+
       - "--certificatesresolvers.myresolver.acme.tlschallenge=true"
       #- "--certificatesresolvers.myresolver.acme.caserver=https://acme-staging-v02.api.letsencrypt.org/directory"
       - "--certificatesresolvers.myresolver.acme.email=dimitry.zelencko@yandex.ru"
@@ -58,4 +68,8 @@ volumes:
 
 secrets:
   secret_key_base:
+    external: true
+
+networks:
+  traefik-public:
     external: true
