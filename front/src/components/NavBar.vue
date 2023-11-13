@@ -29,6 +29,7 @@
           <em>{{currentUser.username}}</em>
         </template>
         <BDropdownItem to="/profile">Profile</BDropdownItem>
+        <BDropdownItem to="/my_compliments">My compliments</BDropdownItem>
         <BDropdownItem
         @click="signOut"
         >
@@ -56,11 +57,12 @@ import { useCurrentUserStore } from '@/stores/CurrentUser'
 
 const CurrentUser = useCurrentUserStore()
 const { currentUser, isLoading } = storeToRefs(CurrentUser)
+
 function signOut() {
   CurrentUser.signOutCurrentUser()
 }
 
-console.log(currentUser)
+console.log(currentUser.username)
 </script>
 
 <style scoped>

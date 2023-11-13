@@ -48,6 +48,7 @@ const props = defineProps({
 
 function getCompliment() {
   CurrentCompliment.getCurrentCompliment()
+  CurrentCompliment.isLiked = false
 }
 
 function rateCompliment() {
@@ -72,7 +73,11 @@ function rateCompliment() {
   /* left: -40px; */
   /* width: 70%; */
 }
-
+@keyframes poyavleniye {
+    0%,25%{
+      opacity: 0.0;
+        }
+      }
 .fetch__compliment {
   margin-bottom: 40px;
   width: 80%;

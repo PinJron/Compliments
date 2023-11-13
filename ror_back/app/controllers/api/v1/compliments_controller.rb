@@ -70,57 +70,57 @@ module Api
       def like
         permit_params!(:id)
 
-        @compliment = find_compliment_by_id(params['id'])
+        @compliment = find_compliment_by_name(params['id'])
 
         return respond_with_error(:error_compliment_not_found) unless @compliment
 
         Compliment
-          .where(id: params['id'])
+          .where(compliment_text: params['id'])
           .update_all('likes = likes + 1')
 
-        @compliment = find_compliment_by_id(params['id'])
+        @compliment = find_compliment_by_name(params['id'])
       end
 
       def unlike
         permit_params!(:id)
 
-        @compliment = find_compliment_by_id(params['id'])
+        @compliment = find_compliment_by_name(params['id'])
 
         return respond_with_error(:error_compliment_not_found) unless @compliment
 
         Compliment
-          .where(id: params['id'])
+          .where(compliment_text: params['id'])
           .update_all('likes = likes - 1')
 
-        @compliment = find_compliment_by_id(params['id'])
+        @compliment = find_compliment_by_name(params['id'])
       end
 
       def dislike
         permit_params!(:id)
 
-        @compliment = find_compliment_by_id(params['id'])
+        @compliment = find_compliment_by_name(params['id'])
 
         return respond_with_error(:error_compliment_not_found) unless @compliment
 
         Compliment
-          .where(id: params['id'])
+          .where(compliment_text: params['id'])
           .update_all('dislikes = dislikes + 1')
 
-        @compliment = find_compliment_by_id(params['id'])
+        @compliment = find_compliment_by_name(params['id'])
       end
 
       def undislike
         permit_params!(:id)
 
-        @compliment = find_compliment_by_id(params['id'])
+        @compliment = find_compliment_by_name(params['id'])
 
         return respond_with_error(:error_compliment_not_found) unless @compliment
 
         Compliment
-          .where(id: params['id'])
+          .where(compliment_text: params['id'])
           .update_all('dislikes = dislikes - 1')
 
-        @compliment = find_compliment_by_id(params['id'])
+        @compliment = find_compliment_by_name(params['id'])
       end
 
       def created_by
@@ -135,6 +135,10 @@ module Api
 
       def find_compliment_by_id(id)
         Compliment.find_by(id: id.to_i)
+      end
+
+      def find_compliment_by_name(name)
+        Compliment.find_by(compliment_text: name.to_s)
       end
 
       def find_user_by_name(data)

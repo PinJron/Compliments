@@ -21,7 +21,7 @@ export default async function loginUser(resourseLogin, resoursePassword) {
       },
       credentials: 'include',
       body: JSON.stringify({
-        username: resourseLogin.value,
+        name: resourseLogin.value,
         password: resoursePassword.value
       })});
 

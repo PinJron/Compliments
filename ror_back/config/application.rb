@@ -18,5 +18,10 @@ module RorBack
     #
     # config.time_zone = "Central Time (US & Canada)"
     # config.eager_load_paths << Rails.root.join("extras")
+
+    # # create a logger with a file as a logging target
+    # config.logger = Logger.new('log/important.log')
+    # # set the minimum log level
+    # config.log_level = :debug
   end
 end

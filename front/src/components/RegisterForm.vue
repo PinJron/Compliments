@@ -9,9 +9,7 @@
     </div>
     <div class="input__wrapper">
       <my-input
-      type="password"
-      autocomplete="current-password"
-      v-model="password" 
+      :input_type="'password'"
       :inputDataText="'Введите пароль'" 
       />
     </div>

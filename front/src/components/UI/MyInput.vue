@@ -1,6 +1,7 @@
 <template>
   <div class="input">
     <input 
+    :type="`${input_type}`"
     class="input--compliment" 
     :value="modelValue" 
     @input="$emit('update:modelValue', $event.target.value)"
@@ -16,10 +17,10 @@ export default {
   
 <script setup>
 
-
 const props = defineProps({
   inputDataText: String,
-  modelValue: String
+  modelValue: String,
+  input_type: String
 })
 
 defineEmits(['update:modelValue'])

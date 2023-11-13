@@ -22,8 +22,9 @@ Rails.application.routes.draw do
 
           patch :update
         end
-
+        
         member do
+          patch :change_password
           delete :delete
         end
       end

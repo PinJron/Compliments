@@ -29,6 +29,7 @@ import { storeToRefs } from 'pinia'
 
 const CurrentUser = useCurrentUserStore()
 const { currentUser, isLoading } = storeToRefs(CurrentUser)
+console.log(currentUser)
 </script>
 
 <style>

@@ -38,7 +38,8 @@ import {RouterView} from "vue-router"
   /* Толщина линии */
 }
 .dropdown-menu {
-  --bs-dropdown-bg: #e9b800;
+  --bs-dropdown-bg: #f8cf9e;
+  --bs-dropdown-link-active-bg: #d5a971;
 }
 
 @font-face {

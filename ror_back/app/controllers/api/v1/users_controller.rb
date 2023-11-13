@@ -25,6 +25,8 @@ module Api
 
         user = User.create!(permitted_params)
 
+        Rails.logger.info 'New view accessed'
+
         session[:user_id] = user.id
 
         respond_with_success(:user_succesfully_register)
@@ -77,10 +79,27 @@ module Api
         respond_with_success(:succesfully_logout)
       end
 
+      def change_password
+        permit_params!(:id, :old_password, :new_password)
+
+        return respond_with_error(:error_same_passwords) unless permitted_params[:old_password] != permitted_params[:new_password]
+
+        @user = find_user_by_query_id(permitted_params)
+
+        return respond_with_error(:error_user_not_exists) unless @user
+        return respond_with_error(:error_wrong_password) unless @user.authenticate(permitted_params[:old_password])
+
+        @user.update!(password: permitted_params[:new_password])
+      end
+
       private
 
       def find_user_by_name(data)
         User.find_by(name: data[:name])
+      end
+
+      def find_user_by_query_id(data)
+        User.find_by(name: data[:id])
       end
     end
   end

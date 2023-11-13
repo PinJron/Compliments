@@ -37,6 +37,13 @@ export default {
 </script>
 
 <style scoped>
+
+@keyframes poyavleniye {
+  0%,25%{
+    opacity: 0.0;
+        }
+}
+
 body {
   font-size: 16px;
 }
@@ -46,6 +53,7 @@ a {
 }
 
 .middle-wrapper {
+  animation: poyavleniye 1s ;
   display: flex;
   justify-content: center;
   align-items: center;

@@ -8,10 +8,8 @@
       />
     </div>
     <div class="input__wrapper">
-      <my-input 
-      type="password"
-      autocomplete="current-password"
-      v-model.trim="password" 
+      <my-input
+      :input_type="'password'"
       :inputDataText="'Введите пароль'" 
       />
     </div>

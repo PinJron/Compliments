@@ -5,6 +5,7 @@ import LoginPage from '../views/LoginPage.vue'
 import AdminPage from '../views/AdminPage.vue'
 import Profile from '../views/Profile.vue'
 import PostPage from '../views/PostPage.vue'
+import MyCompliments from '../views/MyCompliments.vue'
 
 const routes = [
   {
@@ -30,6 +31,10 @@ const routes = [
   {
     path: '/all_compliments',
     component: PostPage
+  },
+  {
+    path: '/my_compliments',
+    component: MyCompliments
   },
 ]
 

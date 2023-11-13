@@ -18,7 +18,8 @@ export const useCurrentComplimentStore = defineStore(
     }
     
     async function rateCurrentCompliment(purpose) {
-      await rateCompliment(currentCompliment.value.id, purpose);
+      console.log(currentCompliment.value.compliment)
+      await rateCompliment(currentCompliment.value.compliment, purpose);
       return currentCompliment.value;
     }
     
