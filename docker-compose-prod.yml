@@ -18,7 +18,6 @@ services:
         - traefik.http.routers.dizeldigital-https.tls=true
         - traefik.http.routers.dizeldigital-https.tls.certresolver=letsencrypt
         - traefik.http.services.dizeldigital.loadbalancer.server.port=3000
-      mode: global
       restart_policy:
         condition: any
         delay: 5s
