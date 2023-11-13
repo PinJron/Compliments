@@ -13,11 +13,11 @@ services:
       labels:
         - traefik.enable=true
         - traefik.docker.network=traefik-public
-        - traefik.http.routers.foc-engineering-https.rule=Host(`wol.dizeldigital.ru`)
-        - traefik.http.routers.foc-engineering-https.entrypoints=websecure
-        - traefik.http.routers.foc-engineering-https.tls=true
-        - traefik.http.routers.foc-engineering-https.tls.certresolver=letsencrypt
-        - traefik.http.services.foc-engineering.loadbalancer.server.port=80
+        - traefik.http.routers.dizeldigital-https.rule=Host(`dizeldigital.ru`)
+        - traefik.http.routers.dizeldigital-https.entrypoints=websecure
+        - traefik.http.routers.dizeldigital-https.tls=true
+        - traefik.http.routers.dizeldigital-https.tls.certresolver=letsencrypt
+        - traefik.http.services.dizeldigital.loadbalancer.server.port=3000
       mode: global
       restart_policy:
         condition: any
@@ -31,7 +31,7 @@ services:
         parallelism: 0
         order: stop-first
     healthcheck:
-      test: curl --fail http://localhost:80 || exit 1
+      test: curl --fail http://localhost:3000 || exit 1
       interval: 20s
       start_period: 20s
       timeout: 5s
@@ -58,10 +58,6 @@ services:
   traefik:
     image: "traefik:v2.10"
     container_name: "traefik"
-    deploy:
-      placement:
-        constraints:
-          - node.labels.traefik-public.traefik-public-certificates == true
     command:
       - "--log"
       - "--api.insecure=true"
@@ -73,7 +69,7 @@ services:
       - "--entrypoints.web.address=:80"
       - "--entrypoints.web.http.redirections.entrypoint.to=websecure"
       - "--entrypoints.web.http.redirections.entrypoint.scheme=https"
-      - "--entrypoints.web.http.redirections.entrypoint.permanent=true"
+      - "--entrypoints.web.http.redirections.entrypoi=nt.permanent=true"
       - "--entrypoints.websecure.address=:443"
 
       - "--certificatesresolvers.myresolver.acme.tlschallenge=true"
