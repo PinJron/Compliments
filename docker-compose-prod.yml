@@ -16,7 +16,7 @@ services:
         - traefik.http.routers.dizeldigital-https.rule=Host(`dizeldigital.ru`)
         - traefik.http.routers.dizeldigital-https.entrypoints=websecure
         - traefik.http.routers.dizeldigital-https.tls=true
-        - traefik.http.routers.dizeldigital-https.tls.certresolver=letsencrypt
+        - traefik.http.routers.dizeldigital-https.tls.certresolver=myresolver
         - traefik.http.services.dizeldigital.loadbalancer.server.port=3000
       restart_policy:
         condition: any
